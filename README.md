@@ -1,77 +1,76 @@
 # Spektro-Control 🔬
 
-**Spektro-Control** adalah perangkat lunak antarmuka modern (GUI) berbasis desktop untuk mengontrol dan membaca data dari instrumen spektrofotometer **Shimadzu UVmini-1240**.
+**Spektro-Control** is a modern, cross-platform desktop application designed to interface with and control the **Shimadzu UVmini-1240** spectrophotometer.
 
-Aplikasi ini dirancang sebagai pengganti atau alternatif dari perangkat lunak kontrol bawaan (seperti UVProbe), dengan fokus utama pada **kemudahan penggunaan (Plug-and-Play)**, antarmuka modern yang responsif, dan alur kerja (*workflow*) yang dioptimalkan untuk keperluan analisis di laboratorium.
-
----
-
-## 🚀 Fitur Utama (Features)
-
-*   **🔌 Koneksi Cerdas (Auto-Connect)**: Tidak perlu lagi pusing memilih COM port. Aplikasi akan secara diam-diam (di *background*) memindai seluruh port USB/Serial yang aktif dan melakukan *handshake* otomatis ke instrumen. Cukup colok kabel, dan aplikasi langsung terhubung!
-*   **🌍 Bilingual (Dua Bahasa)**: Dukungan penuh untuk pergantian bahasa secara langsung (Indonesia & English) tanpa perlu me-*restart* aplikasi.
-*   **🎨 Tema Modern (Dark/Light Mode)**: Antarmuka cantik yang dirancang menggunakan palet warna khusus, mendukung mode Gelap (Dark Mode) untuk mengurangi kelelahan mata, dan mode Terang (Light Mode).
-*   **📊 Analisis Real-Time**:
-    *   **Photometric Mode**: Baca data absorbansi / transmitansi pada panjang gelombang tertentu.
-    *   **Wavelength Scan**: Pindai sampel melalui spektrum panjang gelombang dan lihat grafik yang terbentuk secara langsung (*live plotting*).
-    *   **Time Scan**: Pantau kinetika reaksi atau perubahan absorbansi seiring waktu.
-*   **📁 Manajemen Data**: Ekspor hasil pembacaan spektrum dan kinetika ke dalam format *Spreadsheet* (`.csv`) atau simpan grafiknya langsung sebagai gambar resolusi tinggi (`.png`).
-*   **🖨️ Cetak Langsung (Printing)**: Deteksi printer sistem dan kemampuan untuk mengirim *log* atau grafik secara langsung ke mesin cetak fisik.
-*   **🛡️ Anti-Panik & Error Handling**: Setiap interaksi serial (pengiriman data, GOTO Wavelength, kalibrasi Auto-Zero/Baseline) dilindungi dengan mekanisme perlindungan *error* (Alert System) yang elegan, mencegah aplikasi macet / *freeze* ketika alat gagal merespons.
+Built as an open-source alternative to legacy proprietary software, Spektro-Control focuses on a **Plug-and-Play** experience, providing a responsive interface and an optimized workflow for laboratory analysis.
 
 ---
 
-## 💻 Keterangan Bahasa Pemrograman & Teknologi (Tech Stack)
+## 🚀 Key Features
 
-Aplikasi ini dikembangkan sepenuhnya menggunakan ekosistem **Python** untuk keandalan dan fleksibilitas di berbagai sistem operasi (Windows, Linux, macOS).
-
-*   **Bahasa Pemrograman**: `Python 3.11+`
-*   **Framework GUI**: `PySide6` (Binding resmi Qt6 untuk Python), digunakan untuk membangun seluruh arsitektur antarmuka dan *multithreading* (QThread, QTimer).
-*   **Visualisasi Data**: `pyqtgraph` (Library graphing super cepat berbasis NumPy) untuk merender grafik spektrum dan kinetika secara langsung dengan frame rate tinggi.
-*   **Komunikasi Hardware**: `pyserial` (Mengelola komunikasi RS-232 / COM Port serial dengan protokol ENQ/ACK Shimadzu).
-
-### Struktur Repositori
-*   `/ui/`: Berisi logika tampilan (MainWindow, Dialogs, Themes) dan lokalisasi bahasa (`strings.py`).
-*   `/protocol/`: Berisi implementasi protokol komunikasi serial *low-level* Shimadzu (`uv_protocol.py`).
-*   `main.py`: Titik masuk utama aplikasi (Entry point).
-*   `requirements.txt`: Daftar dependensi library Python.
+*   **🔌 Smart Auto-Connect**: Say goodbye to manual COM port selection. The application silently scans all active USB/Serial ports in the background and automatically performs the ENQ/ACK handshake with the instrument. Just plug in the cable, and you're ready to go!
+*   **🌍 Bilingual Support**: Full support for real-time language switching (English & Indonesian) without needing to restart the application.
+*   **🎨 Modern Theming**: A beautifully designed interface with custom color palettes, fully supporting both Dark Mode (to reduce eye strain) and Light Mode.
+*   **📊 Real-Time Analysis**:
+    *   **Photometric Mode**: Read absorbance and transmittance at a specific wavelength.
+    *   **Wavelength Scan**: Scan samples across a wavelength spectrum with live, high-framerate graph plotting.
+    *   **Time Scan**: Monitor reaction kinetics or absorbance changes over time.
+*   **📁 Data Management**: Export spectrum and kinetics readings to Spreadsheet format (`.csv`) or save high-resolution graphs directly as images (`.png`).
+*   **🖨️ Direct Printing**: Native detection of system printers, allowing you to send instrument logs or graphs directly to physical printers.
+*   **🛡️ Robust Error Handling**: Every serial interaction (data transmission, GOTO Wavelength, Auto-Zero/Baseline calibration) is protected by an elegant Alert System. This prevents the application from freezing or hanging when the instrument fails to respond.
 
 ---
 
-## ⚙️ Panduan Instalasi (Installation)
+## 💻 Tech Stack
 
-1.  **Clone repositori ini:**
+Spektro-Control is developed entirely within the **Python** ecosystem, ensuring reliability and flexibility across operating systems (Windows, Linux, macOS).
+
+*   **Language**: `Python 3.11+`
+*   **GUI Framework**: `PySide6` (Official Qt6 binding for Python), utilized for the entire UI architecture and robust multithreading (QThread, QTimer).
+*   **Data Visualization**: `pyqtgraph` (A fast, NumPy-based graphing library) for rendering live spectrum and kinetics graphs with high frame rates.
+*   **Hardware Communication**: `pyserial` (Manages low-level RS-232 / COM port communication using Shimadzu's ENQ/ACK protocol).
+
+### Repository Structure
+*   `/ui/`: Contains the presentation logic (MainWindow, Dialogs, Themes) and language localization dictionaries (`strings.py`).
+*   `/protocol/`: Contains the low-level serial communication implementation of the Shimadzu protocol (`uv_protocol.py`).
+*   `main.py`: The main entry point of the application.
+*   `requirements.txt`: Python dependency list.
+
+---
+
+## ⚙️ Installation
+
+1.  **Clone the repository:**
     ```bash
     git clone https://github.com/username/spektro-control.git
     cd spektro-control
     ```
 
-2.  **Buat Virtual Environment (Sangat Disarankan):**
+2.  **Create a Virtual Environment (Highly Recommended):**
     ```bash
     # Windows
     python -m venv venv
     venv\Scripts\activate
     ```
 
-3.  **Instal library yang dibutuhkan:**
+3.  **Install dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
 
 ---
 
-## 🏃 Panduan Penggunaan (Usage)
+## 🏃 Usage Guide
 
-Setelah instalasi selesai dan instrumen UVmini-1240 Anda telah terhubung ke PC via kabel RS-232/USB-to-Serial:
+Ensure your Shimadzu UVmini-1240 instrument is powered on, connected to your PC via an RS-232/USB-to-Serial cable, and set to **PC Ctrl** mode (usually by pressing the **F4** key on the instrument panel).
 
-1.  Pastikan instrumen Shimadzu menyala dan berada dalam mode **PC Ctrl** (biasanya dengan menekan tombol **F4** di panel alat).
-2.  Jalankan aplikasi dari terminal:
+1.  Run the application from your terminal:
     ```bash
     python main.py
     ```
-3.  Aplikasi akan otomatis mencari dan mengunci koneksi dengan instrumen. Anda siap menganalisis sampel!
+2.  The application will automatically scan, detect, and lock the connection with the instrument. You are now ready to analyze your samples!
 
-*(Untuk pengaturan COM Port manual, Anda dapat mengaksesnya melalui menu bar: **Instrument > Advanced Connection...**)*
+*(If you ever need to configure the COM port manually, the setting is available in the menu bar under **Instrument > Advanced Connection...**)*
 
 ---
-*Dibuat untuk memudahkan analis laboratorium — Happy Science!* 🧪
+*Built to empower laboratory analysts — Happy Science!* 🧪
