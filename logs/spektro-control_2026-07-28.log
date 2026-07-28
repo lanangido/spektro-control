@@ -1,0 +1,193 @@
+[2026-07-28 17:53:18] [INFO] [root] ==================================================
+[2026-07-28 17:53:18] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 17:53:19] [INFO] [spektro.ui] COM ports found: ['COM1']
+[2026-07-28 17:53:20] [INFO] [spektro.ui] Connecting to COM1...
+[2026-07-28 17:53:20] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-07-28 17:53:20] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got <NAK>
+[2026-07-28 17:53:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 17:53:20] [INFO] [spektro.ui]   RX: <NAK>
+[2026-07-28 17:53:20] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got <NAK>
+[2026-07-28 17:53:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 17:53:20] [INFO] [spektro.ui]   RX: <NAK>
+[2026-07-28 17:53:20] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-07-28 17:53:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 17:53:21] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-07-28 17:53:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 17:53:21] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-07-28 17:53:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 17:53:21] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-07-28 17:53:21] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-07-28 17:55:17] [INFO] [root] ==================================================
+[2026-07-28 17:55:17] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 17:55:18] [INFO] [spektro.ui] COM ports found: ['COM1']
+[2026-07-28 18:26:37] [INFO] [root] ==================================================
+[2026-07-28 18:26:37] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 18:26:38] [INFO] [spektro.ui] COM ports found: ['COM1']
+[2026-07-28 18:29:21] [INFO] [root] ==================================================
+[2026-07-28 18:29:21] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 18:29:22] [INFO] [spektro.ui] COM ports found: ['COM1']
+[2026-07-28 18:34:33] [INFO] [root] ==================================================
+[2026-07-28 18:34:33] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 18:34:33] [INFO] [spektro.ui] COM ports ditemukan: ['COM1']
+[2026-07-28 18:34:53] [INFO] [spektro.ui] Connecting ke COM1...
+[2026-07-28 18:34:53] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-07-28 18:34:53] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 18:34:56] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-07-28 18:34:57] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 18:35:00] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-07-28 18:35:00] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 18:35:03] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-07-28 18:35:03] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 18:35:06] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-07-28 18:35:07] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 18:35:10] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-07-28 18:35:10] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-07-28 18:35:10] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-07-28 18:59:46] [INFO] [root] ==================================================
+[2026-07-28 18:59:46] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 18:59:46] [INFO] [spektro.ui] COM ports ditemukan: ['COM1']
+[2026-07-28 18:59:59] [INFO] [spektro.ui] Connecting ke COM1...
+[2026-07-28 18:59:59] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-07-28 18:59:59] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:00:02] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-07-28 19:00:02] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:00:05] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-07-28 19:00:06] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:00:09] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-07-28 19:00:09] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:00:12] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-07-28 19:00:12] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:00:15] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-07-28 19:00:15] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-07-28 19:00:15] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-07-28 19:05:38] [INFO] [root] ==================================================
+[2026-07-28 19:05:38] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 19:05:38] [INFO] [spektro.ui] COM ports found: ['COM1']
+[2026-07-28 19:06:11] [INFO] [spektro.ui] Connecting to COM1...
+[2026-07-28 19:06:11] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-07-28 19:06:11] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:06:14] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-07-28 19:06:15] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:06:18] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-07-28 19:06:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:06:21] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-07-28 19:06:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:06:24] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-07-28 19:06:25] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:06:28] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-07-28 19:06:28] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-07-28 19:06:28] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-07-28 19:09:36] [INFO] [root] ==================================================
+[2026-07-28 19:09:36] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 19:09:37] [INFO] [spektro.ui] COM ports found: ['COM1']
+[2026-07-28 19:09:39] [INFO] [spektro.ui] Connecting to COM1...
+[2026-07-28 19:09:39] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-07-28 19:09:39] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:09:42] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-07-28 19:09:43] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:09:46] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-07-28 19:09:46] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:09:49] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-07-28 19:09:49] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:09:52] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-07-28 19:09:53] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:09:56] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-07-28 19:09:56] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-07-28 19:09:56] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-07-28 19:09:56] [INFO] [spektro.ui] Connect error: Traceback (most recent call last):
+  File "C:\Users\idola\OneDrive\Desktop\spektro-control\ui\main_window.py", line 68, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idola\OneDrive\Desktop\spektro-control\ui\main_window.py", line 939, in connect_workflow
+    raise RuntimeError("NO_RESPONSE")
+RuntimeError: NO_RESPONSE
+
+[2026-07-28 19:12:16] [INFO] [root] ==================================================
+[2026-07-28 19:12:16] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 19:12:17] [INFO] [spektro.ui] COM ports found: ['COM1']
+[2026-07-28 19:12:19] [INFO] [spektro.ui] Connecting to COM1...
+[2026-07-28 19:12:19] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-07-28 19:12:19] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:12:22] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-07-28 19:12:22] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:12:25] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-07-28 19:12:26] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:12:29] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-07-28 19:12:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:12:32] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-07-28 19:12:32] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:12:35] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-07-28 19:12:36] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-07-28 19:12:36] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-07-28 19:12:36] [INFO] [spektro.ui] Connect error: msg_err_no_response
+[2026-07-28 19:12:36] [ERROR] [spektro.ui] Connection Error: Traceback (most recent call last):
+  File "C:\Users\idola\OneDrive\Desktop\spektro-control\ui\main_window.py", line 68, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idola\OneDrive\Desktop\spektro-control\ui\main_window.py", line 935, in connect_workflow
+    raise RuntimeError("NO_RESPONSE")
+RuntimeError: NO_RESPONSE
+
+[2026-07-28 19:12:56] [INFO] [spektro.ui] Graph saved: C:/Users/idola/OneDrive/Desktop/spektro-control/grafik_20260728_191255.png
+[2026-07-28 19:12:57] [INFO] [spektro.ui] Print skipped
+[2026-07-28 19:14:06] [INFO] [root] ==================================================
+[2026-07-28 19:14:06] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 19:14:07] [INFO] [spektro.ui] COM ports found: ['COM1']
+[2026-07-28 19:14:08] [INFO] [spektro.ui] Connecting to COM1...
+[2026-07-28 19:14:08] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-07-28 19:14:08] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:14:11] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-07-28 19:14:11] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:14:14] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-07-28 19:14:14] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:14:17] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-07-28 19:14:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:14:21] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-07-28 19:14:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:14:24] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-07-28 19:14:24] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-07-28 19:14:24] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-07-28 19:14:24] [INFO] [spektro.ui] Connect error: No response from device after retries. Check cable, ensure device is in PC Ctrl mode (F4 key on device).
+[2026-07-28 19:14:24] [ERROR] [spektro.ui] Connection Error: Traceback (most recent call last):
+  File "C:\Users\idola\OneDrive\Desktop\spektro-control\ui\main_window.py", line 68, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idola\OneDrive\Desktop\spektro-control\ui\main_window.py", line 935, in connect_workflow
+    raise RuntimeError("NO_RESPONSE")
+RuntimeError: NO_RESPONSE
+
+[2026-07-28 19:23:06] [INFO] [root] ==================================================
+[2026-07-28 19:23:06] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 19:23:07] [INFO] [spektro.ui] COM ports found: ['COM1']
+[2026-07-28 19:25:50] [INFO] [root] ==================================================
+[2026-07-28 19:25:50] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 19:25:53] [INFO] [root] ==================================================
+[2026-07-28 19:25:53] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 19:26:56] [INFO] [root] ==================================================
+[2026-07-28 19:26:56] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-07-28 19:26:57] [INFO] [spektro.ui] COM ports found: ['COM1']
+[2026-07-28 19:28:46] [INFO] [spektro.ui] Connecting to COM1...
+[2026-07-28 19:28:46] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-07-28 19:28:46] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:28:49] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-07-28 19:28:49] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:28:52] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-07-28 19:28:52] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:28:55] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-07-28 19:28:55] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:28:59] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-07-28 19:28:59] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-07-28 19:29:02] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-07-28 19:29:02] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-07-28 19:29:02] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-07-28 19:29:02] [INFO] [spektro.ui] Connect error: Tidak ada respons dari alat setelah percobaan. Periksa kabel, pastikan alat dalam mode PC Ctrl (tombol F4 di alat).
+[2026-07-28 19:29:02] [ERROR] [spektro.ui] Connection Error: Traceback (most recent call last):
+  File "C:\Users\idola\OneDrive\Desktop\spektro-control\ui\main_window.py", line 68, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idola\OneDrive\Desktop\spektro-control\ui\main_window.py", line 989, in connect_workflow
+    raise RuntimeError("NO_RESPONSE")
+RuntimeError: NO_RESPONSE
+
+[2026-07-28 19:30:02] [INFO] [spektro.ui] Graph saved: C:/Users/idola/OneDrive/Desktop/spektro-control/grafik_20260728_193000.png
+[2026-07-28 19:31:05] [INFO] [spektro.ui] Print dilewati
