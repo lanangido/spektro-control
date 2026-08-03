@@ -28,6 +28,7 @@ from PySide6.QtWidgets import (
     QDoubleSpinBox, QTabWidget, QTableWidget, QTableWidgetItem,
     QTextEdit, QStatusBar, QSplitter, QFrame, QProgressBar,
     QHeaderView, QScrollArea, QFileDialog, QMessageBox, QStyle,
+    QDialog,
 )
 from PySide6.QtCore import Qt, Signal, Slot, QRunnable, QObject, QThreadPool, QSettings, QUrl, QTimer
 from PySide6.QtGui import QFont, QAction, QDesktopServices, QTextDocument, QPainter
@@ -102,6 +103,7 @@ LIGHT_THEME = {
     'toolbar_border': '#D8DCE3',
     'statusbar_bg': '#EBEDF0',
     'tab_selected_border': '#1565C0',
+    'warning': '#F9A825',
 }
 
 DARK_THEME = {
@@ -131,6 +133,7 @@ DARK_THEME = {
     'toolbar_border': '#3A3D42',
     'statusbar_bg': '#1E2022',
     'tab_selected_border': '#4C9AFF',
+    'warning': '#FFD54F',
 }
 
 
@@ -190,6 +193,339 @@ class CollapsibleSection(QWidget):
 
     def setTitle(self, title):
         self.toggle_button.setText(title)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Dialog Pembuka — Cek Status PC Control
+# ══════════════════════════════════════════════════════════════════════════════
+
+class StartupDialog(QDialog):
+    """
+    Dialog modal yang muncul saat pertama kali aplikasi dibuka.
+    Membantu operator lab awam mengecek apakah alat sudah di mode PC Control
+    sebelum masuk ke aplikasi utama.
+
+    State:
+        'question'   - Pertanyaan awal Ya/Tidak
+        'instruction'- Instruksi pasang kabel (setelah klik Tidak)
+        'connecting' - Sedang mencoba auto-connect
+    """
+
+    # Signal: minta parent untuk connect ke port tertentu
+    request_connect = Signal(str)  # port name
+    # Signal: dialog ditutup (skipped)
+    skipped = Signal()
+
+    def __init__(self, parent=None, theme=None, lang="id"):
+        super().__init__(parent)
+        self._theme = theme or LIGHT_THEME
+        self._lang = lang
+        self._state = "question"
+
+        # Frameless untuk tampil modern, tapi tetap ada tombol X
+        self.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint)
+        self.setAttribute(Qt.WA_TranslucentBackground, False)
+        self.setModal(True)
+        self.setFixedSize(440, 370)
+
+        self._build_ui()
+        self._apply_dialog_theme()
+        self._apply_dialog_language()
+
+    # ── Build UI ──────────────────────────────────────────────────────────
+
+    def _build_ui(self):
+        """Buat semua widget dialog."""
+        main_layout = QVBoxLayout(self)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
+
+        # Container dengan border radius
+        self._container = QFrame(self)
+        self._container.setObjectName("startupDialogContainer")
+        container_layout = QVBoxLayout(self._container)
+        container_layout.setContentsMargins(28, 20, 28, 20)
+        container_layout.setSpacing(0)
+
+        # ── Header: title + close button ──
+        header = QHBoxLayout()
+        header.setContentsMargins(0, 0, 0, 0)
+
+        self._lbl_title = QLabel()
+        self._lbl_title.setObjectName("startupTitle")
+        self._lbl_title.setFont(QFont("Segoe UI", 11, QFont.Bold))
+        header.addWidget(self._lbl_title)
+        header.addStretch(1)
+
+        self._btn_close = QPushButton("✕")
+        self._btn_close.setObjectName("startupCloseBtn")
+        self._btn_close.setFixedSize(28, 28)
+        self._btn_close.setCursor(Qt.PointingHandCursor)
+        self._btn_close.clicked.connect(self._on_skip)
+        header.addWidget(self._btn_close)
+
+        container_layout.addLayout(header)
+        container_layout.addSpacing(12)
+
+        # ── Icon ──
+        self._lbl_icon = QLabel("🔬")
+        self._lbl_icon.setAlignment(Qt.AlignCenter)
+        self._lbl_icon.setFont(QFont("Segoe UI Emoji", 36))
+        self._lbl_icon.setObjectName("startupIcon")
+        container_layout.addWidget(self._lbl_icon)
+        container_layout.addSpacing(12)
+
+        # ── Question text / Instruction text (stacked) ──
+        self._lbl_question = QLabel()
+        self._lbl_question.setObjectName("startupQuestion")
+        self._lbl_question.setAlignment(Qt.AlignCenter)
+        self._lbl_question.setWordWrap(True)
+        self._lbl_question.setFont(QFont("Segoe UI", 12))
+        container_layout.addWidget(self._lbl_question)
+
+        self._lbl_instruction = QLabel()
+        self._lbl_instruction.setObjectName("startupInstruction")
+        self._lbl_instruction.setAlignment(Qt.AlignCenter)
+        self._lbl_instruction.setWordWrap(True)
+        self._lbl_instruction.setFont(QFont("Segoe UI", 10))
+        self._lbl_instruction.setVisible(False)
+        container_layout.addWidget(self._lbl_instruction)
+
+        # ── Connecting label ──
+        self._lbl_connecting = QLabel()
+        self._lbl_connecting.setObjectName("startupConnecting")
+        self._lbl_connecting.setAlignment(Qt.AlignCenter)
+        self._lbl_connecting.setFont(QFont("Segoe UI", 11))
+        self._lbl_connecting.setVisible(False)
+        container_layout.addWidget(self._lbl_connecting)
+
+        # ── Progress bar (connecting state) ──
+        self._progress = QProgressBar()
+        self._progress.setRange(0, 0)  # indeterminate
+        self._progress.setFixedHeight(4)
+        self._progress.setTextVisible(False)
+        self._progress.setVisible(False)
+        container_layout.addWidget(self._progress)
+
+        container_layout.addSpacing(18)
+
+        # ── Buttons: Ya / Tidak (question state) ──
+        self._btn_row_question = QWidget()
+        btn_q_layout = QHBoxLayout(self._btn_row_question)
+        btn_q_layout.setContentsMargins(0, 0, 0, 0)
+        btn_q_layout.setSpacing(12)
+
+        self._btn_yes = QPushButton()
+        self._btn_yes.setObjectName("btnPrimary")
+        self._btn_yes.setFixedHeight(38)
+        self._btn_yes.setCursor(Qt.PointingHandCursor)
+        self._btn_yes.setFont(QFont("Segoe UI", 11, QFont.Bold))
+        self._btn_yes.clicked.connect(self._on_yes)
+        btn_q_layout.addWidget(self._btn_yes, 1)
+
+        self._btn_no = QPushButton()
+        self._btn_no.setObjectName("btnSecondary")
+        self._btn_no.setFixedHeight(38)
+        self._btn_no.setCursor(Qt.PointingHandCursor)
+        self._btn_no.setFont(QFont("Segoe UI", 11, QFont.Bold))
+        self._btn_no.clicked.connect(self._on_no)
+        btn_q_layout.addWidget(self._btn_no, 1)
+
+        container_layout.addWidget(self._btn_row_question)
+
+        # ── Button: Sudah, Coba Lagi (instruction state) ──
+        self._btn_retry = QPushButton()
+        self._btn_retry.setObjectName("btnPrimary")
+        self._btn_retry.setFixedHeight(38)
+        self._btn_retry.setCursor(Qt.PointingHandCursor)
+        self._btn_retry.setFont(QFont("Segoe UI", 11, QFont.Bold))
+        self._btn_retry.clicked.connect(self._on_yes)  # same as Yes
+        self._btn_retry.setVisible(False)
+        container_layout.addWidget(self._btn_retry)
+
+        container_layout.addSpacing(10)
+
+        # ── Skip link ──
+        self._btn_skip = QPushButton()
+        self._btn_skip.setObjectName("startupSkipBtn")
+        self._btn_skip.setCursor(Qt.PointingHandCursor)
+        self._btn_skip.setFont(QFont("Segoe UI", 9))
+        self._btn_skip.clicked.connect(self._on_skip)
+        container_layout.addWidget(self._btn_skip, alignment=Qt.AlignCenter)
+
+        container_layout.addStretch(1)
+        main_layout.addWidget(self._container)
+
+    # ── State transitions ─────────────────────────────────────────────────
+
+    def _set_state(self, state: str):
+        """Switch tampilan dialog sesuai state."""
+        self._state = state
+
+        is_question = state == "question"
+        is_instruction = state == "instruction"
+        is_connecting = state == "connecting"
+
+        self._lbl_icon.setVisible(not is_connecting)
+        self._lbl_question.setVisible(is_question)
+        self._lbl_instruction.setVisible(is_instruction)
+        self._lbl_connecting.setVisible(is_connecting)
+        self._progress.setVisible(is_connecting)
+        self._btn_row_question.setVisible(is_question)
+        self._btn_retry.setVisible(is_instruction)
+        self._btn_skip.setVisible(not is_connecting)
+
+    def _on_yes(self):
+        """User klik Ya atau Sudah Coba Lagi — coba auto-connect."""
+        self._set_state("connecting")
+        # Emit signal ke MainWindow untuk lakukan connect
+        self.request_connect.emit("")
+
+    def _on_no(self):
+        """User klik Tidak — tampilkan instruksi."""
+        self._set_state("instruction")
+
+    def _on_skip(self):
+        """User klik Lewati / X — tutup dialog, masuk ke app utama."""
+        self.skipped.emit()
+        self.accept()
+
+    def on_connect_success(self):
+        """Dipanggil oleh MainWindow saat connect berhasil."""
+        self.accept()
+
+    def on_connect_failed(self):
+        """Dipanggil oleh MainWindow saat connect gagal. Kembali ke pertanyaan."""
+        self._set_state("question")
+
+    # ── Theming ────────────────────────────────────────────────────────────
+
+    def update_theme(self, theme):
+        """Update tema dialog (dipanggil saat user toggle tema)."""
+        self._theme = theme
+        self._apply_dialog_theme()
+
+    def _apply_dialog_theme(self):
+        """Terapkan stylesheet sesuai tema aktif."""
+        t = self._theme
+        self.setStyleSheet(f"""
+            QFrame#startupDialogContainer {{
+                background-color: {t['bg_panel']};
+                border: 1px solid {t['border']};
+                border-radius: 12px;
+            }}
+            QLabel#startupTitle {{
+                color: {t['text_primary']};
+                background: transparent;
+                font-size: 14px;
+            }}
+            QLabel#startupIcon {{
+                background: transparent;
+                padding: 4px;
+            }}
+            QLabel#startupQuestion {{
+                color: {t['text_primary']};
+                background: transparent;
+                font-size: 14px;
+                padding: 6px 0;
+            }}
+            QLabel#startupInstruction {{
+                color: {t['text_secondary']};
+                background-color: {t['bg_panel_header']};
+                border: 1px solid {t['border']};
+                border-radius: 8px;
+                font-size: 12px;
+                padding: 14px;
+            }}
+            QLabel#startupConnecting {{
+                color: {t['accent']};
+                background: transparent;
+                font-size: 13px;
+                padding: 8px;
+            }}
+            QPushButton#btnPrimary {{
+                background-color: {t['accent']};
+                color: {t['accent_text']};
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                padding: 8px 16px;
+            }}
+            QPushButton#btnPrimary:hover {{
+                background-color: {t['accent_hover']};
+            }}
+            QPushButton#btnPrimary:disabled {{
+                background-color: {t['bg_panel_header']};
+                color: {t['text_secondary']};
+            }}
+            QPushButton#btnSecondary {{
+                background-color: transparent;
+                color: {t['accent']};
+                border: 1px solid {t['accent']};
+                border-radius: 6px;
+                font-weight: 600;
+                padding: 8px 16px;
+            }}
+            QPushButton#btnSecondary:hover {{
+                background-color: {t['accent']};
+                color: {t['accent_text']};
+            }}
+            QPushButton#startupCloseBtn {{
+                background: transparent;
+                color: {t['text_secondary']};
+                border: none;
+                border-radius: 14px;
+                font-size: 14px;
+                font-weight: bold;
+            }}
+            QPushButton#startupCloseBtn:hover {{
+                background-color: {t['danger']};
+                color: white;
+            }}
+            QPushButton#startupSkipBtn {{
+                background: transparent;
+                color: {t['text_secondary']};
+                border: none;
+                padding: 4px 12px;
+                font-size: 11px;
+            }}
+            QPushButton#startupSkipBtn:hover {{
+                color: {t['accent']};
+                text-decoration: underline;
+            }}
+            QProgressBar {{
+                background-color: {t['bg_panel_header']};
+                border: none;
+                border-radius: 2px;
+            }}
+            QProgressBar::chunk {{
+                background-color: {t['accent']};
+                border-radius: 2px;
+            }}
+        """)
+
+    # ── Language ───────────────────────────────────────────────────────────
+
+    def update_language(self, lang: str):
+        """Update bahasa dialog (dipanggil saat user toggle bahasa)."""
+        self._lang = lang
+        self._apply_dialog_language()
+
+    def _tr(self, key):
+        """Helper i18n lokal."""
+        return STRINGS.get(self._lang, STRINGS['id']).get(key, key)
+
+    def _apply_dialog_language(self):
+        """Set semua teks dialog sesuai bahasa aktif."""
+        self._lbl_title.setText(self._tr("dlg_startup_title"))
+        self._lbl_question.setText(self._tr("dlg_startup_question"))
+        self._btn_yes.setText(self._tr("dlg_startup_btn_yes"))
+        self._btn_no.setText(self._tr("dlg_startup_btn_no"))
+        self._lbl_instruction.setText(self._tr("dlg_startup_instruction"))
+        self._btn_retry.setText(self._tr("dlg_startup_btn_retry"))
+        self._btn_skip.setText(self._tr("dlg_startup_btn_skip"))
+        self._lbl_connecting.setText(self._tr("dlg_startup_connecting"))
+
 
 class MainWindow(QMainWindow):
     """Jendela utama Spektro-Control."""
@@ -268,7 +604,6 @@ class MainWindow(QMainWindow):
         left_layout.addWidget(status_container)
 
         # Setup Advanced Connection Dialog (Hidden)
-        from PySide6.QtWidgets import QDialog
         self.dlg_adv_conn = QDialog(self)
         self.dlg_adv_conn.setWindowTitle(self._tr("title_adv_conn"))
         self.dlg_adv_conn.setMinimumWidth(300)
@@ -607,6 +942,7 @@ class MainWindow(QMainWindow):
         self._scan_result = None
 
         self._log_signal.connect(self._append_log_text)
+        self._startup_dialog = None  # Init sebelum _apply_theme yang cek atribut ini
         self._setup_menu_bar()
         self._setup_connections()
         self._set_controls_enabled(False)
@@ -619,6 +955,10 @@ class MainWindow(QMainWindow):
         self._refresh_ports()
         self._refresh_printers()
 
+        # -- Dialog Pembuka --
+        # Tampilkan setelah window sudah di-render
+        QTimer.singleShot(300, self._show_startup_dialog)
+
     # ══════════════════════════════════════════════════════════════════════════
     # i18n helper
     # ══════════════════════════════════════════════════════════════════════════
@@ -629,6 +969,62 @@ class MainWindow(QMainWindow):
         if kwargs:
             return text.format(**kwargs)
         return text
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # Dialog Pembuka
+    # ══════════════════════════════════════════════════════════════════════════
+
+    def _show_startup_dialog(self):
+        """Tampilkan dialog pembuka untuk cek status PC Control."""
+        self._startup_dialog = StartupDialog(
+            parent=self,
+            theme=self._current_theme,
+            lang=self._current_lang,
+        )
+        self._startup_dialog.request_connect.connect(self._on_startup_connect_request)
+
+        def on_dialog_closed():
+            # Setelah dialog ditutup (baik skip maupun connect berhasil),
+            # mulai auto-connect timer
+            if not self.protocol.is_connected:
+                self.timer_auto_connect.start(3000)
+            self._startup_dialog = None
+
+        self._startup_dialog.finished.connect(on_dialog_closed)
+        self._startup_dialog.show()
+
+    def _on_startup_connect_request(self, _port_hint: str):
+        """
+        Dipanggil saat user klik Ya / Sudah Coba Lagi di startup dialog.
+        Tentukan port, set ke combo_port, lalu trigger _on_connect_clicked.
+        """
+        # 1. Coba port terakhir yang berhasil
+        last_port = self._settings.value("last_port", "")
+
+        # 2. Refresh daftar port
+        self._refresh_ports()
+        ports = UVProtocol.list_ports()
+
+        # 3. Tentukan port yang akan dicoba
+        target_port = ""
+        if last_port and last_port in ports:
+            target_port = last_port
+        elif ports:
+            target_port = ports[0]
+
+        if not target_port:
+            # Tidak ada port tersedia — langsung gagal
+            self._show_alert(
+                self._tr("title_error"),
+                self._tr("msg_error_no_port"),
+            )
+            if self._startup_dialog and self._startup_dialog.isVisible():
+                self._startup_dialog.on_connect_failed()
+            return
+
+        # 4. Set port di combo dan trigger connect
+        self.combo_port.setCurrentText(target_port)
+        self._on_connect_clicked()
 
     # ══════════════════════════════════════════════════════════════════════════
     # Menu bar
@@ -724,6 +1120,10 @@ class MainWindow(QMainWindow):
         self.plot_curve.setPen(pg.mkPen(color=t['graph_line'], width=2))
 
         self._refresh_conn_dot()
+
+        # Forward theme ke startup dialog jika masih terbuka
+        if self._startup_dialog and self._startup_dialog.isVisible():
+            self._startup_dialog.update_theme(t)
 
     def _refresh_conn_dot(self):
         """Update warna dot koneksi sesuai tema dan status."""
@@ -845,6 +1245,10 @@ class MainWindow(QMainWindow):
         # -- Status bar --
         self.status_bar.showMessage(self._tr("msg_ready"))
 
+        # Forward language ke startup dialog jika masih terbuka
+        if self._startup_dialog and self._startup_dialog.isVisible():
+            self._startup_dialog.update_language(self._current_lang)
+
     # ══════════════════════════════════════════════════════════════════════════
     # Signal / Slot wiring
     # ══════════════════════════════════════════════════════════════════════════
@@ -866,10 +1270,13 @@ class MainWindow(QMainWindow):
         self._is_auto_connecting = False
         self.timer_auto_connect = QTimer(self)
         self.timer_auto_connect.timeout.connect(self._auto_connect_tick)
-        self.timer_auto_connect.start(3000)
+        # Timer TIDAK di-start di sini — akan di-start setelah startup dialog ditutup
 
     def _auto_connect_tick(self):
         if self.protocol.is_connected or self._is_auto_connecting or self.dlg_adv_conn.isVisible():
+            return
+        # Jangan auto-connect saat startup dialog masih terbuka
+        if self._startup_dialog and self._startup_dialog.isVisible():
             return
         
         ports = UVProtocol.list_ports()
@@ -993,6 +1400,11 @@ class MainWindow(QMainWindow):
             self._update_connection_status(True)
             self.status_bar.showMessage(self._tr("msg_connected", port=port))
             self._log(self._tr("msg_connect_ok", port=port))
+            # Simpan port terakhir yang berhasil connect
+            self._settings.setValue("last_port", port)
+            # Notify startup dialog jika masih terbuka
+            if self._startup_dialog and self._startup_dialog.isVisible():
+                self._startup_dialog.on_connect_success()
 
         def on_error(err):
             self._update_connection_status(False)
@@ -1007,6 +1419,9 @@ class MainWindow(QMainWindow):
             self._log(self._tr("msg_connect_error", err=msg))
             self.logger.error(f"Connection Error: {err}")
             self._show_alert(self._tr("title_error"), msg)
+            # Notify startup dialog jika masih terbuka
+            if self._startup_dialog and self._startup_dialog.isVisible():
+                self._startup_dialog.on_connect_failed()
 
         self._run_in_thread(connect_workflow, on_success, on_error)
 

@@ -1,0 +1,27 @@
+[2026-08-03 15:43:25] [INFO] [root] ==================================================
+[2026-08-03 15:43:25] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-08-03 15:44:02] [INFO] [root] ==================================================
+[2026-08-03 15:44:02] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-08-03 15:44:02] [INFO] [spektro.ui] COM ports ditemukan: ['COM1']
+[2026-08-03 15:48:23] [INFO] [root] ==================================================
+[2026-08-03 15:48:23] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-08-03 15:48:24] [INFO] [spektro.ui] COM ports ditemukan: ['COM1']
+[2026-08-03 15:48:38] [INFO] [spektro.ui] COM ports ditemukan: ['COM1']
+[2026-08-03 15:48:38] [INFO] [spektro.ui] Connecting ke COM1...
+[2026-08-03 15:48:38] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-03 15:48:38] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-03 15:48:41] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-03 15:48:41] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-03 15:48:44] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-03 15:48:44] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-03 15:48:47] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-03 15:48:51] [INFO] [root] ==================================================
+[2026-08-03 15:48:51] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-08-03 15:48:51] [INFO] [spektro.ui] COM ports ditemukan: ['COM1']
+[2026-08-03 15:48:59] [INFO] [spektro.ui] COM ports ditemukan: ['COM1']
+[2026-08-03 15:48:59] [INFO] [spektro.ui] Connecting ke COM1...
+[2026-08-03 15:48:59] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-03 15:48:59] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-03 15:49:02] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-03 15:49:03] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-03 15:49:06] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout

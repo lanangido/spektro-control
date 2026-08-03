@@ -163,6 +163,16 @@ STRINGS = {
         # -- Log detail --
         "log_ports_found": "COM ports ditemukan: {ports}",
         "log_no_ports": "(tidak ada)",
+
+        # -- Dialog Pembuka --
+        "dlg_startup_title": "Cek Koneksi Alat",
+        "dlg_startup_question": "Apakah di layar spektrofotometer\nsudah tampil 'PC Control'?",
+        "dlg_startup_btn_yes": "Ya",
+        "dlg_startup_btn_no": "Tidak",
+        "dlg_startup_instruction": "Colok kabel USB-RS232 ke alat terlebih dahulu, baru nyalakan alat spektrofotometer.\n\nAlat akan otomatis masuk mode PC Control setelah dinyalakan dengan kabel sudah terpasang.",
+        "dlg_startup_btn_retry": "Sudah, Coba Lagi",
+        "dlg_startup_btn_skip": "Lewati",
+        "dlg_startup_connecting": "Menghubungkan ke alat...",
     },
 
     # ══════════════════════════════════════════════════════════════════════
@@ -318,5 +328,15 @@ STRINGS = {
         # -- Log detail --
         "log_ports_found": "COM ports found: {ports}",
         "log_no_ports": "(none)",
+
+        # -- Startup Dialog --
+        "dlg_startup_title": "Check Instrument Connection",
+        "dlg_startup_question": "Does the spectrophotometer screen\nshow 'PC Control'?",
+        "dlg_startup_btn_yes": "Yes",
+        "dlg_startup_btn_no": "No",
+        "dlg_startup_instruction": "Plug the USB-RS232 cable into the instrument first, then turn on the spectrophotometer.\n\nThe instrument will automatically enter PC Control mode after powering on with the cable connected.",
+        "dlg_startup_btn_retry": "Done, Try Again",
+        "dlg_startup_btn_skip": "Skip",
+        "dlg_startup_connecting": "Connecting to instrument...",
     },
 }
