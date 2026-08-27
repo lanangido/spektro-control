@@ -28,12 +28,14 @@ from PySide6.QtWidgets import (
     QDoubleSpinBox, QTabWidget, QTableWidget, QTableWidgetItem,
     QTextEdit, QStatusBar, QSplitter, QFrame, QProgressBar,
     QHeaderView, QScrollArea, QFileDialog, QMessageBox, QStyle,
-    QDialog,
+    QDialog, QToolButton, QSizePolicy, QDockWidget, QTreeWidget,
+    QTreeWidgetItem, QToolBar, QListWidget, QListWidgetItem, QStackedWidget
 )
-from PySide6.QtCore import Qt, Signal, Slot, QRunnable, QObject, QThreadPool, QSettings, QUrl, QTimer
-from PySide6.QtGui import QFont, QAction, QDesktopServices, QTextDocument, QPainter
+from PySide6.QtCore import Qt, Signal, Slot, QRunnable, QObject, QThreadPool, QSettings, QUrl, QTimer, QPropertyAnimation, QParallelAnimationGroup, QAbstractAnimation
+from PySide6.QtGui import QFont, QAction, QDesktopServices, QTextDocument, QPainter, QIcon, QPixmap, QColor
 from PySide6.QtPrintSupport import QPrinterInfo, QPrinter
 import pyqtgraph as pg
+import numpy as np
 
 from protocol.uv_protocol import UVProtocol
 from ui.strings import STRINGS
@@ -136,6 +138,18 @@ DARK_THEME = {
     'warning': '#FFD54F',
 }
 
+# ── Print-safe palette — always used for printing, regardless of active theme ──
+PRINT_PALETTE = {
+    'background': '#FFFFFF',
+    'graph_line': '#000000',
+    'graph_line_width': 3,
+    'text': '#000000',
+    'grid': '#888888',
+    'axis': '#000000',
+    'table_border': '#000000',
+    'table_header_bg': '#E0E0E0',
+}
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 # Mode pengukuran: index combo → kode command v
@@ -143,11 +157,6 @@ DARK_THEME = {
 
 MODE_LABELS = ["Abs", "T%", "Energy"]
 MODE_Y_LABELS = ["Absorbance", "Transmittance (%)", "Energy"]
-
-
-
-from PySide6.QtWidgets import QToolButton, QSizePolicy
-from PySide6.QtCore import QPropertyAnimation, QParallelAnimationGroup, QAbstractAnimation
 
 class CollapsibleSection(QWidget):
     def __init__(self, settings, section_id: str, title: str = "", parent=None):
@@ -528,6 +537,7 @@ class StartupDialog(QDialog):
 
 
 class MainWindow(QMainWindow):
+    _progress_signal = Signal(int, int)
     """Jendela utama Spektro-Control."""
 
     # Signal untuk marshal log dari worker thread ke GUI thread
@@ -551,340 +561,90 @@ class MainWindow(QMainWindow):
         self._active_workers = set()
         self._serial_pool = QThreadPool()
 
-        # -- Central widget --
+        # ═══════════════════════════════════════════════════════════════════════════
+        # CENTRAL WIDGET — Plot & Data Area
+        # ═══════════════════════════════════════════════════════════════════════════
         central = QWidget()
         self.setCentralWidget(central)
 
-        # -- Menu bar (moved to end of init) --
-
-        # -- Main layout --
-        main_layout = QVBoxLayout(central)
-        main_layout.setContentsMargins(6, 4, 6, 4)
-        main_layout.setSpacing(0)
-
-        main_splitter = QSplitter(Qt.Horizontal)
-        main_layout.addWidget(main_splitter)
-
-        # ═══════════════════════════════════════════════════════════════════════
-        # PANEL KIRI — Kontrol (scrollable)
-        # ═══════════════════════════════════════════════════════════════════════
-        left_scroll = QScrollArea()
-        left_scroll.setWidgetResizable(True)
-        left_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        # left_scroll.setMaximumWidth(270) removed
-        left_scroll.setMinimumWidth(320)
-        left_scroll.setFrameShape(QFrame.NoFrame)
-        left_scroll.setObjectName("leftScroll")
-
-        left_panel = QWidget()
-        left_panel.setObjectName("leftPanel")
-        left_layout = QVBoxLayout(left_panel)
-        left_layout.setContentsMargins(4, 6, 4, 6)
-        left_layout.setSpacing(10)
-
-        # ── 1. Status Koneksi (Auto) ─────────────────────────────────────────
-        status_container = QWidget()
-        status_container.setObjectName("statusContainer")
-        status_container.setStyleSheet("background: transparent; margin-bottom: 8px;")
-        status_h = QHBoxLayout(status_container)
-        status_h.setContentsMargins(0, 0, 0, 0)
-        status_h.setSpacing(6)
-
-        self.lbl_conn_dot = QLabel("●")
-        self.lbl_conn_dot.setObjectName("connDot")
-        self.lbl_conn_dot.setFixedWidth(14)
-        status_h.addWidget(self.lbl_conn_dot)
-
-        self.lbl_conn_status = QLabel()
-        self.lbl_conn_status.setWordWrap(True)
-        self.lbl_conn_status.setObjectName("lblConnStatus")
-        status_h.addWidget(self.lbl_conn_status)
-        status_h.addStretch(1)
-
-        left_layout.addWidget(status_container)
-
-        # Setup Advanced Connection Dialog (Hidden)
-        self.dlg_adv_conn = QDialog(self)
-        self.dlg_adv_conn.setWindowTitle(self._tr("title_adv_conn"))
-        self.dlg_adv_conn.setMinimumWidth(300)
-        dlg_layout = QGridLayout(self.dlg_adv_conn)
-        
-        self.lbl_com_port = QLabel()
-        dlg_layout.addWidget(self.lbl_com_port, 0, 0)
-        
-        self.combo_port = QComboBox()
-        self.combo_port.setMinimumWidth(100)
-        # Not Editable anymore to prevent typing invalid ports
-        dlg_layout.addWidget(self.combo_port, 0, 1)
-        
-        self.btn_connect = QPushButton()
-        self.btn_connect.setObjectName("btnPrimary")
-        dlg_layout.addWidget(self.btn_connect, 1, 0, 1, 2)
-
-        # ── 8. Status Printer ────────────────────────────────────────────────
-        self.grp_printer = CollapsibleSection(self._settings, "printer")
-        printer_layout = QGridLayout(); self.grp_printer.setContentLayout(printer_layout)
-        printer_layout.setSpacing(6)
-
-        self.lbl_printer_name = QLabel()
-        self.lbl_printer_name.setWordWrap(True)
-        printer_layout.addWidget(self.lbl_printer_name, 0, 0, 1, 2)
-
-        self.combo_printer = QComboBox()
-        printer_layout.addWidget(self.combo_printer, 1, 0)
-
-        self.btn_refresh_printer = QPushButton()
-        self.btn_refresh_printer.setObjectName("btnSecondary")
-        self.btn_refresh_printer.setToolTip(self._tr("tt_refresh_printer"))
-        self.btn_refresh_printer.setText("\u21BB")
-        self.btn_refresh_printer.setFixedWidth(32)
-        self.btn_refresh_printer.clicked.connect(self._refresh_printers)
-        printer_layout.addWidget(self.btn_refresh_printer, 1, 1)
-
-        p_status_container = QWidget()
-        p_status_container.setObjectName("statusContainer")
-        p_status_h = QHBoxLayout(p_status_container)
-        p_status_h.setContentsMargins(2, 0, 0, 0)
-        p_status_h.setSpacing(4)
-
-        self.lbl_printer_dot = QLabel("\u25cf")
-        self.lbl_printer_dot.setObjectName("connDot")
-        self.lbl_printer_dot.setFixedWidth(14)
-        p_status_h.addWidget(self.lbl_printer_dot)
-
-        self.lbl_printer_status = QLabel()
-        self.lbl_printer_status.setWordWrap(True)
-        self.lbl_printer_status.setObjectName("lblConnStatus")
-        p_status_h.addWidget(self.lbl_printer_status)
-        p_status_h.addStretch(1)
-
-        printer_layout.addWidget(p_status_container, 2, 0, 1, 2)
-        left_layout.addWidget(self.grp_printer)
-
-        # ── 2. Mode Pengukuran ───────────────────────────────────────────────
-        self.grp_mode = CollapsibleSection(self._settings, "mode")
-        mode_layout = QHBoxLayout(); self.grp_mode.setContentLayout(mode_layout)
-        mode_layout.setSpacing(6)
-
-        self.lbl_mode = QLabel()
-        self.lbl_mode.setWordWrap(True)
-        mode_layout.addWidget(self.lbl_mode)
-
-        self.combo_mode = QComboBox()
-        self.combo_mode.addItems(["Abs", "T%", "Energy"])
-        mode_layout.addWidget(self.combo_mode, 1)
-
-        left_layout.addWidget(self.grp_mode)
-
-        # ── 3. GOTO Wavelength ───────────────────────────────────────────────
-        self.grp_wl = CollapsibleSection(self._settings, "wl")
-        wl_layout = QGridLayout(); self.grp_wl.setContentLayout(wl_layout)
-        wl_layout.setSpacing(6)
-
-        self.lbl_wavelength = QLabel()
-        self.lbl_wavelength.setWordWrap(True)
-        wl_layout.addWidget(self.lbl_wavelength, 0, 0)
-
-        self.spin_wavelength = QDoubleSpinBox()
-        self.spin_wavelength.setRange(190.0, 1100.0)
-        self.spin_wavelength.setDecimals(1)
-        self.spin_wavelength.setSingleStep(0.5)
-        self.spin_wavelength.setValue(500.0)
-        self.spin_wavelength.setSuffix(" nm")
-        wl_layout.addWidget(self.spin_wavelength, 0, 1)
-
-        self.btn_goto_wl = QPushButton()
-        self.btn_goto_wl.setObjectName("btnPrimary")
-        wl_layout.addWidget(self.btn_goto_wl, 1, 0, 1, 2)
-
-        left_layout.addWidget(self.grp_wl)
-
-        # ── 4. Kalibrasi ────────────────────────────────────────────────────
-        self.grp_calib = CollapsibleSection(self._settings, "calib")
-        calib_layout = QGridLayout()
-        self.grp_calib.setContentLayout(calib_layout)
-        calib_layout.setSpacing(6)
-
-        self.btn_auto_zero = QPushButton()
-        self.btn_auto_zero.setObjectName("btnPrimary")
-        calib_layout.addWidget(self.btn_auto_zero, 0, 0, 1, 2)
-
-        self.lbl_bl_start = QLabel()
-        self.lbl_bl_start.setWordWrap(True)
-        calib_layout.addWidget(self.lbl_bl_start, 1, 0)
-
-        self.spin_bl_start = QDoubleSpinBox()
-        self.spin_bl_start.setRange(190.0, 1100.0)
-        self.spin_bl_start.setDecimals(1)
-        self.spin_bl_start.setValue(190.0)
-        self.spin_bl_start.setSuffix(" nm")
-        calib_layout.addWidget(self.spin_bl_start, 1, 1)
-
-        self.lbl_bl_end = QLabel()
-        self.lbl_bl_end.setWordWrap(True)
-        calib_layout.addWidget(self.lbl_bl_end, 2, 0)
-
-        self.spin_bl_end = QDoubleSpinBox()
-        self.spin_bl_end.setRange(190.0, 1100.0)
-        self.spin_bl_end.setDecimals(1)
-        self.spin_bl_end.setValue(1100.0)
-        self.spin_bl_end.setSuffix(" nm")
-        calib_layout.addWidget(self.spin_bl_end, 2, 1)
-
-        self.btn_baseline = QPushButton()
-        self.btn_baseline.setObjectName("btnPrimary")
-        calib_layout.addWidget(self.btn_baseline, 3, 0, 1, 2)
-
-        left_layout.addWidget(self.grp_calib)
-
-        # ── 5. Baca Data ────────────────────────────────────────────────────
-        self.grp_read = CollapsibleSection(self._settings, "read")
-        read_layout = QHBoxLayout(self.grp_read)
-
-        self.btn_read_data = QPushButton()
-        self.btn_read_data.setObjectName("btnPrimary")
-        read_layout.addWidget(self.btn_read_data)
-
-        left_layout.addWidget(self.grp_read)
-
-        # ── 6. Wavelength Scan ───────────────────────────────────────────────
-        self.grp_wscan = CollapsibleSection(self._settings, "wscan")
-        wscan_layout = QGridLayout(); self.grp_wscan.setContentLayout(wscan_layout)
-        wscan_layout.setSpacing(6)
-
-        self.lbl_scan_start = QLabel()
-        self.lbl_scan_start.setWordWrap(True)
-        wscan_layout.addWidget(self.lbl_scan_start, 0, 0)
-
-        self.spin_scan_start = QDoubleSpinBox()
-        self.spin_scan_start.setRange(190.0, 1100.0)
-        self.spin_scan_start.setDecimals(1)
-        self.spin_scan_start.setValue(190.0)
-        self.spin_scan_start.setSuffix(" nm")
-        wscan_layout.addWidget(self.spin_scan_start, 0, 1)
-
-        self.lbl_scan_end = QLabel()
-        self.lbl_scan_end.setWordWrap(True)
-        wscan_layout.addWidget(self.lbl_scan_end, 1, 0)
-
-        self.spin_scan_end = QDoubleSpinBox()
-        self.spin_scan_end.setRange(190.0, 1100.0)
-        self.spin_scan_end.setDecimals(1)
-        self.spin_scan_end.setValue(800.0)
-        self.spin_scan_end.setSuffix(" nm")
-        wscan_layout.addWidget(self.spin_scan_end, 1, 1)
-
-        self.lbl_speed = QLabel()
-        self.lbl_speed.setWordWrap(True)
-        wscan_layout.addWidget(self.lbl_speed, 2, 0)
-
-        self.combo_scan_speed = QComboBox()
-        self.combo_scan_speed.addItems([
-            "1 - Very Fast", "2 - Fast", "3 - Medium",
-            "4 - Slow", "5 - Very Slow"
-        ])
-        self.combo_scan_speed.setCurrentIndex(2)
-        wscan_layout.addWidget(self.combo_scan_speed, 2, 1)
-
-        self.btn_start_wscan = QPushButton()
-        self.btn_start_wscan.setObjectName("btnPrimary")
-        wscan_layout.addWidget(self.btn_start_wscan, 3, 0, 1, 2)
-
-        self.progress_wscan = QProgressBar()
-        self.progress_wscan.setRange(0, 0)
-        self.progress_wscan.setVisible(False)
-        self.progress_wscan.setTextVisible(True)
-        wscan_layout.addWidget(self.progress_wscan, 4, 0, 1, 2)
-
-        left_layout.addWidget(self.grp_wscan)
-
-        # ── 7. Time Scan ────────────────────────────────────────────────────
-        self.grp_tscan = CollapsibleSection(self._settings, "tscan")
-        tscan_layout = QGridLayout(); self.grp_tscan.setContentLayout(tscan_layout)
-        tscan_layout.setSpacing(6)
-
-        self.lbl_duration = QLabel()
-        self.lbl_duration.setWordWrap(True)
-        tscan_layout.addWidget(self.lbl_duration, 0, 0)
-
-        self.spin_tscan_duration = QSpinBox()
-        self.spin_tscan_duration.setRange(1, 6500)
-        self.spin_tscan_duration.setValue(60)
-        tscan_layout.addWidget(self.spin_tscan_duration, 0, 1)
-
-        self.lbl_unit = QLabel()
-        self.lbl_unit.setWordWrap(True)
-        tscan_layout.addWidget(self.lbl_unit, 1, 0)
-
-        self.combo_tscan_unit = QComboBox()
-        tscan_layout.addWidget(self.combo_tscan_unit, 1, 1)
-
-        self.btn_start_tscan = QPushButton()
-        self.btn_start_tscan.setObjectName("btnPrimary")
-        tscan_layout.addWidget(self.btn_start_tscan, 2, 0, 1, 2)
-
-        self.progress_tscan = QProgressBar()
-        self.progress_tscan.setRange(0, 0)
-        self.progress_tscan.setVisible(False)
-        self.progress_tscan.setTextVisible(True)
-        tscan_layout.addWidget(self.progress_tscan, 3, 0, 1, 2)
-
-        left_layout.addWidget(self.grp_tscan)
-
-
-        # Spacer
-        left_layout.addStretch(1)
-
-        left_scroll.setWidget(left_panel)
-        main_splitter.addWidget(left_scroll)
-
-        # ═══════════════════════════════════════════════════════════════════════
-        # PANEL KANAN — Grafik + Data
-        # ═══════════════════════════════════════════════════════════════════════
-        right_panel = QWidget()
-        right_layout = QVBoxLayout(right_panel)
-        right_layout.setContentsMargins(0, 0, 0, 0)
-        right_layout.setSpacing(6)
-
-        # ── Header: angka besar wavelength & hasil ukur ──────────────────────
-        header_frame = QFrame()
-        header_frame.setObjectName("headerFrame")
-        header_layout = QHBoxLayout(header_frame)
-        header_layout.setContentsMargins(20, 12, 20, 12)
-
-        self.lbl_current_wl = QLabel("--- nm")
-        self.lbl_current_wl.setObjectName("lblBigValue")
-        self.lbl_current_wl.setFont(QFont("Segoe UI", 22, QFont.Bold))
-        header_layout.addWidget(self.lbl_current_wl)
-
-        header_layout.addStretch(1)
-
-        self.lbl_current_value = QLabel("---")
-        self.lbl_current_value.setObjectName("lblBigValue")
-        self.lbl_current_value.setFont(QFont("Segoe UI", 22, QFont.Bold))
-        header_layout.addWidget(self.lbl_current_value)
-
-        self.lbl_current_unit = QLabel("Abs")
-        self.lbl_current_unit.setObjectName("lblUnit")
-        self.lbl_current_unit.setFont(QFont("Segoe UI", 14))
-        header_layout.addWidget(self.lbl_current_unit)
-
-        right_layout.addWidget(header_frame)
-
-        # ── Grafik pyqtgraph ─────────────────────────────────────────────────
+        central_layout = QVBoxLayout(central)
+        central_layout.setContentsMargins(6, 4, 6, 4)
+        central_layout.setSpacing(6)
+
+
+        self.central_stack = QStackedWidget()
+        central_layout.addWidget(self.central_stack)
+
+        self.page_photometry = QWidget()
+        self.layout_photometry = QHBoxLayout(self.page_photometry)
+        self.layout_photometry.setContentsMargins(0, 0, 0, 0)
+        self.central_stack.addWidget(self.page_photometry)
+
+        self.page_spectrum = QWidget()
+        self.layout_spectrum = QHBoxLayout(self.page_spectrum)
+        self.layout_spectrum.setContentsMargins(0, 0, 0, 0)
+        self.central_stack.addWidget(self.page_spectrum)
+
+        self.page_tscan = QWidget()
+        self.layout_tscan = QHBoxLayout(self.page_tscan)
+        self.layout_tscan.setContentsMargins(0, 0, 0, 0)
+        self.central_stack.addWidget(self.page_tscan)
+
+        self.page_printer = QWidget()
+        self.layout_printer = QHBoxLayout(self.page_printer)
+        self.layout_printer.setContentsMargins(0, 0, 0, 0)
+        self.central_stack.addWidget(self.page_printer)
+
+        # ── Plot (pyqtgraph) ─────────────────────────────────────────────────────
         self.plot_widget = pg.PlotWidget()
         self.plot_widget.setLabel('left', 'Absorbance')
         self.plot_widget.setLabel('bottom', 'Wavelength', units='nm')
         self.plot_widget.showGrid(x=True, y=True, alpha=0.3)
         self.plot_widget.setMinimumHeight(300)
 
-        self.plot_curve = self.plot_widget.plot(
-            pen=pg.mkPen(color=self._current_theme['graph_line'], width=2)
-        )
+        self._spectra_curves = {}
+        self._spectra_count = 1
+        self.peak_annotations = []
+        self.auto_read_timer = QTimer(self)
+        self.auto_read_timer.timeout.connect(self._perform_auto_read)
 
-        right_layout.addWidget(self.plot_widget, stretch=3)
+        self.timer_live_display = QTimer(self)
+        self.timer_live_display.timeout.connect(self._perform_live_read)
 
-        # ── Export bar (antara grafik dan tab) ────────────────────────────────
+
+
+        self.vLine = pg.InfiniteLine(angle=90, movable=False)
+        self.hLine = pg.InfiniteLine(angle=0, movable=False)
+        self.plot_widget.addItem(self.vLine)
+        self.plot_widget.addItem(self.hLine)
+        self.proxy = pg.SignalProxy(self.plot_widget.scene().sigMouseMoved, rateLimit=60, slot=self._on_mouse_moved)
+
+        # ── Side Panel for Scans ──────────────────────────────────────────────────
+        plot_and_list_layout = QHBoxLayout()
+        plot_and_list_layout.addWidget(self.plot_widget, stretch=3)
+
+        side_panel_layout = QVBoxLayout()
+        self.list_spectra = QListWidget()
+        self.list_spectra.itemChanged.connect(self._on_scan_visibility_changed)
+        side_panel_layout.addWidget(self.list_spectra)
+
+        self.btn_display_all_spectra = QPushButton("Display All Spectra")
+        self.btn_display_all_spectra.clicked.connect(self._on_display_all_spectra_clicked)
+        side_panel_layout.addWidget(self.btn_display_all_spectra)
+
+        self.btn_find_peak = QPushButton("Find Peak")
+        self.btn_find_peak.clicked.connect(self._on_find_peak_clicked)
+        side_panel_layout.addWidget(self.btn_find_peak)
+
+        self.btn_clear_peaks = QPushButton("Clear Peaks")
+        self.btn_clear_peaks.clicked.connect(self._on_clear_peaks_clicked)
+        side_panel_layout.addWidget(self.btn_clear_peaks)
+
+        plot_and_list_layout.addLayout(side_panel_layout, stretch=1)
+
+        central_layout.addLayout(plot_and_list_layout, stretch=3)
+
+        # ── Export bar ─────────────────────────────────────────────────────────
         export_bar = QWidget()
         export_bar.setObjectName("exportBar")
         export_h = QHBoxLayout(export_bar)
@@ -901,9 +661,9 @@ class MainWindow(QMainWindow):
 
         export_h.addStretch(1)
 
-        right_layout.addWidget(export_bar)
+        central_layout.addWidget(export_bar)
 
-        # ── Tab bawah: Tabel Data / Log Komunikasi ───────────────────────────
+        # ── Bottom tabs: Data Table / Communication Log ──────────────────────
         self.tab_bottom = QTabWidget()
         self.tab_bottom.setMaximumHeight(220)
 
@@ -918,16 +678,396 @@ class MainWindow(QMainWindow):
         self.txt_log.setFont(QFont("Consolas", 9))
         self.tab_bottom.addTab(self.txt_log, "")
 
-        right_layout.addWidget(self.tab_bottom, stretch=1)
+        central_layout.addWidget(self.tab_bottom, stretch=1)
 
-        main_splitter.addWidget(right_panel)
-        main_splitter.setSizes([320, 830])
+        # ═══════════════════════════════════════════════════════════════════════════
+        # TOOLBAR — Hardware Control Buttons (pinned below menubar)
+        # ═══════════════════════════════════════════════════════════════════════════
+        self.toolbar = QToolBar()
+        self.toolbar.setObjectName("hardwareToolbar")
+        self.toolbar.setMovable(False)
+        self.toolbar.setFloatable(False)
+        self.addToolBar(Qt.TopToolBarArea, self.toolbar)
+
+        # ── GOTO Wavelength ──
+        # Move spin_wavelength out of the toolbar so it doesn't clutter it.
+        # We can just hide it for now, or keep it in the layout elsewhere.
+        self.spin_wavelength = QDoubleSpinBox()
+        self.spin_wavelength.setRange(190.0, 1100.0)
+        self.spin_wavelength.setDecimals(1)
+        self.spin_wavelength.setSingleStep(0.5)
+        self.spin_wavelength.setValue(500.0)
+        self.spin_wavelength.setSuffix(" nm")
+        self.spin_wavelength.setFixedWidth(110)
+        self.spin_wavelength.setVisible(False) # Hidden from toolbar
+
+        self.btn_goto_wl = QPushButton("Goto Wavelength")
+        self.btn_goto_wl.setIcon(self._create_icon("λ", "#8e44ad"))
+        self.btn_goto_wl.setObjectName("btnPrimary")
+        self.toolbar.addWidget(self.btn_goto_wl)
+
+        # ── Digital Screens (Wavelength and Value) ──
+        # Wavelength Digital Screen
+        self.frame_wl = QFrame()
+        self.frame_wl.setStyleSheet("QFrame { background-color: #d9d9d9; border: 2px inset #ffffff; margin: 2px 4px; padding: 0px 8px; }")
+        layout_wl = QHBoxLayout(self.frame_wl)
+        layout_wl.setContentsMargins(0, 0, 0, 0)
+        self.lbl_current_wl = QLabel("660.00 nm")
+        self.lbl_current_wl.setStyleSheet("color: #000; border: none; background: transparent;")
+        self.lbl_current_wl.setFont(QFont("Arial", 16))
+        layout_wl.addWidget(self.lbl_current_wl)
+        self.toolbar.addWidget(self.frame_wl)
+
+        # Start / Stop Buttons
+        self.btn_start = QPushButton("Start")
+        self.btn_start.setIcon(self._create_icon("●", "#2ecc71"))
+        self.btn_start.setObjectName("btnPrimary")
+        self.toolbar.addWidget(self.btn_start)
+
+        self.btn_stop = QPushButton("Stop")
+        self.btn_stop.setIcon(self._create_icon("●", "#7f8c8d"))
+        self.btn_stop.setObjectName("btnSecondary")
+        self.btn_stop.setEnabled(False)
+        self.toolbar.addWidget(self.btn_stop)
+
+        # Value Digital Screen
+        self.frame_val = QFrame()
+        self.frame_val.setStyleSheet("QFrame { background-color: #d9d9d9; border: 2px inset #ffffff; margin: 2px 4px; padding: 0px 8px; }")
+        layout_val = QHBoxLayout(self.frame_val)
+        layout_val.setContentsMargins(0, 0, 0, 0)
+        layout_val.setSpacing(8)
+        self.lbl_current_value = QLabel("0.000")
+        self.lbl_current_value.setStyleSheet("color: #000; border: none; background: transparent;")
+        self.lbl_current_value.setFont(QFont("Arial", 16))
+        layout_val.addWidget(self.lbl_current_value)
+        
+        self.lbl_current_unit = QLabel("Abs")
+        self.lbl_current_unit.setStyleSheet("color: #000; border: none; background: transparent;")
+        self.lbl_current_unit.setFont(QFont("Arial", 14))
+        layout_val.addWidget(self.lbl_current_unit)
+        self.toolbar.addWidget(self.frame_val)
+
+        # Auto Zero & Baseline
+        self.btn_auto_zero = QPushButton("AutoZero")
+        self.btn_auto_zero.setObjectName("btnPrimary")
+        self.toolbar.addWidget(self.btn_auto_zero)
+
+        self.btn_baseline = QPushButton("Baseline")
+        self.btn_baseline.setObjectName("btnPrimary")
+        self.toolbar.addWidget(self.btn_baseline)
+
+        self.toolbar.addSeparator()
+        
+        # ── Extra Read Actions (Moved to far right) ──
+        self.btn_read_data = QPushButton("Read Data")
+        self.btn_read_data.setObjectName("btnSecondary")
+        self.toolbar.addWidget(self.btn_read_data)
+
+        self.spin_auto_read_interval = QSpinBox()
+        self.spin_auto_read_interval.setRange(1, 60)
+        self.spin_auto_read_interval.setValue(1)
+        self.spin_auto_read_interval.setSuffix(" s")
+        self.spin_auto_read_interval.setToolTip("Auto-Read Interval")
+        self.toolbar.addWidget(self.spin_auto_read_interval)
+
+        self.btn_auto_read_toggle = QPushButton("Start Auto-Read")
+        self.btn_auto_read_toggle.setCheckable(True)
+        self.btn_auto_read_toggle.setObjectName("btnSecondary")
+        self.toolbar.addWidget(self.btn_auto_read_toggle)
+
+        # We rename the old btn_start_wscan and btn_start_tscan in variables just to not break existing _set_controls_enabled loops.
+        # Alternatively, we map btn_start to them.
+        self.btn_start_wscan = self.btn_start
+        self.btn_start_tscan = self.btn_start
+        
+        self.lbl_wavelength = QLabel() # Dummy to not break strings.py translations
+        self.lbl_crosshair = QLabel() # Dummy
+        
+        # ═══════════════════════════════════════════════════════════════════════════
+        # DOCK WIDGET — Workspace Navigation (left side)
+        # ═══════════════════════════════════════════════════════════════════════════
+        self.dock_workspace = QDockWidget()
+        self.dock_workspace.setObjectName("dockWorkspace")
+        self.dock_workspace.setAllowedAreas(Qt.LeftDockWidgetArea | Qt.RightDockWidgetArea)
+        self.dock_workspace.setMinimumWidth(280)
+        self.dock_workspace.setFeatures(
+            QDockWidget.DockWidgetMovable | QDockWidget.DockWidgetClosable
+        )
+
+        dock_container = QWidget()
+        dock_container.setObjectName("dockContainer")
+        dock_main_layout = QVBoxLayout(dock_container)
+        dock_main_layout.setContentsMargins(4, 6, 4, 6)
+        dock_main_layout.setSpacing(6)
+
+        # ── Connection Status ────────────────────────────────────────────────────
+        status_container = QWidget()
+        status_container.setObjectName("statusContainer")
+        status_container.setStyleSheet("background: transparent; margin-bottom: 4px;")
+        status_h = QHBoxLayout(status_container)
+        status_h.setContentsMargins(0, 0, 0, 0)
+        status_h.setSpacing(6)
+
+        self.lbl_conn_dot = QLabel("●")
+        self.lbl_conn_dot.setObjectName("connDot")
+        self.lbl_conn_dot.setFixedWidth(14)
+        status_h.addWidget(self.lbl_conn_dot)
+
+        self.lbl_conn_status = QLabel()
+        self.lbl_conn_status.setWordWrap(True)
+        self.lbl_conn_status.setObjectName("lblConnStatus")
+        status_h.addWidget(self.lbl_conn_status)
+        status_h.addStretch(1)
+
+        dock_main_layout.addWidget(status_container)
+
+        # Setup Advanced Connection Dialog (Hidden)
+        self.dlg_adv_conn = QDialog(self)
+        self.dlg_adv_conn.setWindowTitle(self._tr("title_adv_conn"))
+        self.dlg_adv_conn.setMinimumWidth(300)
+        dlg_layout = QGridLayout(self.dlg_adv_conn)
+
+        self.lbl_com_port = QLabel()
+        dlg_layout.addWidget(self.lbl_com_port, 0, 0)
+
+        self.combo_port = QComboBox()
+        self.combo_port.setMinimumWidth(100)
+        dlg_layout.addWidget(self.combo_port, 0, 1)
+
+        self.btn_connect = QPushButton()
+        self.btn_connect.setObjectName("btnPrimary")
+        dlg_layout.addWidget(self.btn_connect, 1, 0, 1, 2)
+
+        # ── Tree Widget (Workspace Navigation) ──────────────────────────────────
+
+
+        icon_folder = self._create_icon("📂", "#4a90e2")
+        icon_chart = self._create_icon("📊", "#e67e22")
+        icon_bullet = self._create_icon("●", "#7f8c8d", 10)
+        icon_printer = self._create_icon("🖨️", "#27ae60")
+        icon_conn = self._create_icon("🔌", "#8e44ad")
+
+        self.tree_workspace = QTreeWidget()
+        self.tree_workspace.setObjectName("workspaceTree")
+        self.tree_workspace.setHeaderHidden(True)
+        self.tree_workspace.setIndentation(20)
+        self.tree_workspace.setAnimated(True)
+        self.tree_workspace.setRootIsDecorated(True)
+        self.tree_workspace.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        self.tree_photometry = QTreeWidgetItem(self.tree_workspace)
+        self.tree_photometry.setIcon(0, icon_chart)
+        self.tree_item_mode = QTreeWidgetItem(self.tree_photometry)
+        self.tree_item_mode.setIcon(0, icon_bullet)
+        self.tree_item_goto_wl = QTreeWidgetItem(self.tree_photometry)
+        self.tree_item_goto_wl.setIcon(0, icon_bullet)
+        self.tree_item_calib = QTreeWidgetItem(self.tree_photometry)
+        self.tree_item_calib.setIcon(0, icon_bullet)
+        self.tree_item_read = QTreeWidgetItem(self.tree_photometry)
+        self.tree_item_read.setIcon(0, icon_bullet)
+
+        self.tree_spectrum = QTreeWidgetItem(self.tree_workspace)
+        self.tree_spectrum.setIcon(0, icon_folder)
+        self.tree_item_wscan = QTreeWidgetItem(self.tree_spectrum)
+        self.tree_item_wscan.setIcon(0, icon_bullet)
+        self.tree_item_tscan = QTreeWidgetItem(self.tree_spectrum)
+        self.tree_item_tscan.setIcon(0, icon_bullet)
+
+        self.tree_workspace.expandAll()
+        self.tree_workspace.itemClicked.connect(self._on_tree_item_clicked)
+
+        # ── Second Tree (Accessories) ──────────────────────────────────────────
+        self.tree_acc = QTreeWidget()
+        self.tree_acc.setObjectName("accessoriesTree")
+        self.tree_acc.setHeaderHidden(True)
+        self.tree_acc.setIndentation(20)
+        self.tree_acc.setAnimated(True)
+        self.tree_acc.setRootIsDecorated(True)
+        self.tree_acc.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        self.tree_accessories = QTreeWidgetItem(self.tree_acc)
+        self.tree_accessories.setIcon(0, icon_folder)
+        self.tree_item_printer = QTreeWidgetItem(self.tree_accessories)
+        self.tree_item_printer.setIcon(0, icon_printer)
+        self.tree_item_connection = QTreeWidgetItem(self.tree_accessories)
+        self.tree_item_connection.setIcon(0, icon_conn)
+
+        self.tree_acc.expandAll()
+        self.tree_acc.itemClicked.connect(self._on_tree_item_clicked)
+
+        # ── Splitter for Trees ────────────────────────────────────────────────
+        self.dock_splitter = QSplitter(Qt.Vertical)
+        self.dock_splitter.addWidget(self.tree_workspace)
+        self.dock_splitter.addWidget(self.tree_acc)
+        self.dock_splitter.setSizes([700, 300]) # ~70% top / 30% bottom
+        
+        dock_main_layout.addWidget(self.dock_splitter)
+
+        # ── Setup QStackedWidget Pages ───────────────────────────────────────────
+
+        # ── 1. Mode Pengukuran & Kalibrasi (Photometry Page) ────────────────────
+        self.lbl_mode = QLabel()
+        self.lbl_mode.setWordWrap(True)
+        self.layout_photometry.addWidget(self.lbl_mode)
+
+        self.combo_mode = QComboBox()
+        self.combo_mode.addItems(["Abs", "T%", "Energy"])
+        self.layout_photometry.addWidget(self.combo_mode)
+
+        self.lbl_bl_start = QLabel()
+        self.lbl_bl_start.setWordWrap(True)
+        self.layout_photometry.addWidget(self.lbl_bl_start)
+
+        self.spin_bl_start = QDoubleSpinBox()
+        self.spin_bl_start.setRange(190.0, 1100.0)
+        self.spin_bl_start.setDecimals(1)
+        self.spin_bl_start.setValue(190.0)
+        self.spin_bl_start.setSuffix(" nm")
+        self.layout_photometry.addWidget(self.spin_bl_start)
+
+        self.lbl_bl_end = QLabel()
+        self.lbl_bl_end.setWordWrap(True)
+        self.layout_photometry.addWidget(self.lbl_bl_end)
+
+        self.spin_bl_end = QDoubleSpinBox()
+        self.spin_bl_end.setRange(190.0, 1100.0)
+        self.spin_bl_end.setDecimals(1)
+        self.spin_bl_end.setValue(1100.0)
+        self.spin_bl_end.setSuffix(" nm")
+        self.layout_photometry.addWidget(self.spin_bl_end)
+        self.layout_photometry.addStretch(1)
+
+        # ── 2. Wavelength Scan ───────────────────────────────────────────────────
+        self.lbl_scan_start = QLabel()
+        self.lbl_scan_start.setWordWrap(True)
+        self.layout_spectrum.addWidget(self.lbl_scan_start)
+
+        self.spin_scan_start = QDoubleSpinBox()
+        self.spin_scan_start.setRange(190.0, 1100.0)
+        self.spin_scan_start.setDecimals(1)
+        self.spin_scan_start.setValue(190.0)
+        self.spin_scan_start.setSuffix(" nm")
+        self.layout_spectrum.addWidget(self.spin_scan_start)
+
+        self.lbl_scan_end = QLabel()
+        self.lbl_scan_end.setWordWrap(True)
+        self.layout_spectrum.addWidget(self.lbl_scan_end)
+
+        self.spin_scan_end = QDoubleSpinBox()
+        self.spin_scan_end.setRange(190.0, 1100.0)
+        self.spin_scan_end.setDecimals(1)
+        self.spin_scan_end.setValue(800.0)
+        self.spin_scan_end.setSuffix(" nm")
+        self.layout_spectrum.addWidget(self.spin_scan_end)
+
+        self.lbl_speed = QLabel()
+        self.lbl_speed.setWordWrap(True)
+        self.layout_spectrum.addWidget(self.lbl_speed)
+
+        self.combo_scan_speed = QComboBox()
+        self.combo_scan_speed.addItems([
+            "1 - Very Fast", "2 - Fast", "3 - Medium",
+            "4 - Slow", "5 - Very Slow"
+        ])
+        self.combo_scan_speed.setCurrentIndex(2)
+        self.layout_spectrum.addWidget(self.combo_scan_speed)
+
+        self.progress_wscan = QProgressBar()
+        self.progress_wscan.setRange(0, 100)
+        self.progress_wscan.setVisible(False)
+        self.progress_wscan.setTextVisible(True)
+        self.layout_spectrum.addWidget(self.progress_wscan)
+        self.layout_spectrum.addStretch(1)
+
+        # ── 3. Time Scan ────────────────────────────────────────────────────────
+        self.lbl_duration = QLabel()
+        self.lbl_duration.setWordWrap(True)
+        self.layout_tscan.addWidget(self.lbl_duration)
+
+        self.spin_tscan_duration = QSpinBox()
+        self.spin_tscan_duration.setRange(1, 6500)
+        self.spin_tscan_duration.setValue(60)
+        self.layout_tscan.addWidget(self.spin_tscan_duration)
+
+        self.lbl_unit = QLabel()
+        self.lbl_unit.setWordWrap(True)
+        self.layout_tscan.addWidget(self.lbl_unit)
+
+        self.combo_tscan_unit = QComboBox()
+        self.layout_tscan.addWidget(self.combo_tscan_unit)
+
+        self.progress_tscan = QProgressBar()
+        self.progress_tscan.setRange(0, 100)
+        self.progress_tscan.setVisible(False)
+        self.progress_tscan.setTextVisible(True)
+        self.layout_tscan.addWidget(self.progress_tscan)
+        self.layout_tscan.addStretch(1)
+
+        # ── 4. Printer ──────────────────────────────────────────────────────────
+        self.lbl_printer_name = QLabel()
+        self.lbl_printer_name.setWordWrap(True)
+        self.layout_printer.addWidget(self.lbl_printer_name)
+
+        self.combo_printer = QComboBox()
+        self.layout_printer.addWidget(self.combo_printer)
+
+        self.btn_refresh_printer = QPushButton()
+        self.btn_refresh_printer.setObjectName("btnSecondary")
+        self.btn_refresh_printer.setToolTip(self._tr("tt_refresh_printer"))
+        self.btn_refresh_printer.setText("↻")
+        self.btn_refresh_printer.setFixedWidth(32)
+        self.btn_refresh_printer.clicked.connect(self._refresh_printers)
+        self.layout_printer.addWidget(self.btn_refresh_printer)
+
+        p_status_container = QWidget()
+        p_status_container.setObjectName("statusContainer")
+        p_status_h = QHBoxLayout(p_status_container)
+        p_status_h.setContentsMargins(2, 0, 0, 0)
+        p_status_h.setSpacing(4)
+
+        self.lbl_printer_dot = QLabel("●")
+        self.lbl_printer_dot.setObjectName("connDot")
+        self.lbl_printer_dot.setFixedWidth(14)
+        p_status_h.addWidget(self.lbl_printer_dot)
+
+        self.lbl_printer_status = QLabel()
+        self.lbl_printer_status.setWordWrap(True)
+        self.lbl_printer_status.setObjectName("lblConnStatus")
+        p_status_h.addWidget(self.lbl_printer_status)
+        p_status_h.addStretch(1)
+
+        self.layout_printer.addWidget(p_status_container)
+        self.layout_printer.addStretch(1)
+
+
+        self.dock_workspace.setWidget(dock_container)
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.dock_workspace)
+
+        # ── Tree-to-panel mapping (for click navigation) ──────────────────────
+        self._tree_panel_map = {
+            id(self.tree_item_mode): 0,
+            id(self.tree_item_goto_wl): 0,
+            id(self.tree_item_calib): 0,
+            id(self.tree_item_read): 0,
+            id(self.tree_item_wscan): 1,
+            id(self.tree_item_tscan): 2,
+            id(self.tree_item_printer): 3,
+            id(self.tree_item_connection): 3,
+        }
 
         # ═══════════════════════════════════════════════════════════════════════
         # Status bar
         # ═══════════════════════════════════════════════════════════════════════
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
+
+        self.main_progress_bar = QProgressBar()
+        self.main_progress_bar.setRange(0, 0)
+        self.main_progress_bar.setVisible(False)
+        self.main_progress_bar.setFixedWidth(150)
+        self.status_bar.addPermanentWidget(self.main_progress_bar)
+
+        self._progress_signal.connect(self._on_progress_update)
 
         # ═══════════════════════════════════════════════════════════════════════
         # Logic setup
@@ -942,12 +1082,12 @@ class MainWindow(QMainWindow):
         self._scan_result = None
 
         self._log_signal.connect(self._append_log_text)
-        self._startup_dialog = None  # Init sebelum _apply_theme yang cek atribut ini
+        self._startup_dialog = None
         self._setup_menu_bar()
         self._setup_connections()
         self._set_controls_enabled(False)
 
-        # Apply theme + language (sets all text and colors)
+        # Apply theme + language
         self._apply_theme()
         self._apply_language()
 
@@ -955,13 +1095,8 @@ class MainWindow(QMainWindow):
         self._refresh_ports()
         self._refresh_printers()
 
-        # -- Dialog Pembuka --
-        # Tampilkan setelah window sudah di-render
+        # Tampilkan Dialog Pembuka
         QTimer.singleShot(300, self._show_startup_dialog)
-
-    # ══════════════════════════════════════════════════════════════════════════
-    # i18n helper
-    # ══════════════════════════════════════════════════════════════════════════
 
     def _tr(self, key, **kwargs):
         """Ambil string terjemahan. Pakai kwargs untuk format placeholder."""
@@ -969,10 +1104,6 @@ class MainWindow(QMainWindow):
         if kwargs:
             return text.format(**kwargs)
         return text
-
-    # ══════════════════════════════════════════════════════════════════════════
-    # Dialog Pembuka
-    # ══════════════════════════════════════════════════════════════════════════
 
     def _show_startup_dialog(self):
         """Tampilkan dialog pembuka untuk cek status PC Control."""
@@ -984,8 +1115,6 @@ class MainWindow(QMainWindow):
         self._startup_dialog.request_connect.connect(self._on_startup_connect_request)
 
         def on_dialog_closed():
-            # Setelah dialog ditutup (baik skip maupun connect berhasil),
-            # mulai auto-connect timer
             if not self.protocol.is_connected:
                 self.timer_auto_connect.start(3000)
             self._startup_dialog = None
@@ -994,18 +1123,10 @@ class MainWindow(QMainWindow):
         self._startup_dialog.show()
 
     def _on_startup_connect_request(self, _port_hint: str):
-        """
-        Dipanggil saat user klik Ya / Sudah Coba Lagi di startup dialog.
-        Tentukan port, set ke combo_port, lalu trigger _on_connect_clicked.
-        """
-        # 1. Coba port terakhir yang berhasil
         last_port = self._settings.value("last_port", "")
-
-        # 2. Refresh daftar port
         self._refresh_ports()
         ports = UVProtocol.list_ports()
 
-        # 3. Tentukan port yang akan dicoba
         target_port = ""
         if last_port and last_port in ports:
             target_port = last_port
@@ -1013,7 +1134,6 @@ class MainWindow(QMainWindow):
             target_port = ports[0]
 
         if not target_port:
-            # Tidak ada port tersedia — langsung gagal
             self._show_alert(
                 self._tr("title_error"),
                 self._tr("msg_error_no_port"),
@@ -1022,19 +1142,12 @@ class MainWindow(QMainWindow):
                 self._startup_dialog.on_connect_failed()
             return
 
-        # 4. Set port di combo dan trigger connect
         self.combo_port.setCurrentText(target_port)
         self._on_connect_clicked()
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Menu bar
-    # ══════════════════════════════════════════════════════════════════════════
-
     def _setup_menu_bar(self):
-        """Setup menu bar: File, Instrument, Tools + language & theme toggle."""
         mbar = self.menuBar()
 
-        # -- File --
         self.menu_file = mbar.addMenu("")
         self.act_export_csv_menu = QAction("", self)
         self.act_export_csv_menu.setEnabled(False)
@@ -1044,7 +1157,6 @@ class MainWindow(QMainWindow):
         self.act_exit.triggered.connect(self.close)
         self.menu_file.addAction(self.act_exit)
 
-        # -- Instrument --
         self.menu_instrument = mbar.addMenu("")
         self.act_conn_info = QAction("", self)
         self.act_conn_info.setEnabled(False)
@@ -1053,18 +1165,21 @@ class MainWindow(QMainWindow):
         self.act_adv_conn.triggered.connect(self.dlg_adv_conn.exec)
         self.menu_instrument.addAction(self.act_adv_conn)
 
-        # -- Tools --
         self.menu_tools = mbar.addMenu("")
         self.act_settings = QAction("", self)
         self.act_settings.setEnabled(False)
         self.menu_tools.addAction(self.act_settings)
-        
         self.menu_tools.addSeparator()
         self.act_open_log = QAction("", self)
         self.act_open_log.triggered.connect(self._open_log_folder)
         self.menu_tools.addAction(self.act_open_log)
 
-        # -- Corner: language toggle + theme toggle --
+
+        # View menu
+        self.menu_view = mbar.addMenu("")
+        self.act_show_workspace = self.dock_workspace.toggleViewAction()
+        self.menu_view.addAction(self.act_show_workspace)
+
         self.corner = QWidget()
         corner_layout = QHBoxLayout(self.corner)
         corner_layout.setContentsMargins(0, 0, 4, 0)
@@ -1086,12 +1201,7 @@ class MainWindow(QMainWindow):
 
         mbar.setCornerWidget(self.corner)
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Theme system
-    # ══════════════════════════════════════════════════════════════════════════
-
     def _toggle_theme(self):
-        """Toggle antara light dan dark, simpan preferensi."""
         if self._current_theme['name'] == 'light':
             self._current_theme = DARK_THEME
         else:
@@ -1100,33 +1210,28 @@ class MainWindow(QMainWindow):
         self._apply_theme()
 
     def _apply_theme(self):
-        """Terapkan tema saat ini ke seluruh UI."""
         t = self._current_theme
-
-        # Update toggle button text
         if t['name'] == 'light':
             self.btn_theme_toggle.setText(self._tr("theme_to_dark"))
         else:
             self.btn_theme_toggle.setText(self._tr("theme_to_light"))
 
         self.setStyleSheet(self._build_stylesheet(t))
-
-        # pyqtgraph colors
         self.plot_widget.setBackground(t['graph_bg'])
         for axis_name in ('left', 'bottom'):
             ax = self.plot_widget.getAxis(axis_name)
             ax.setPen(pg.mkPen(color=t['graph_fg']))
             ax.setTextPen(pg.mkPen(color=t['graph_fg']))
-        self.plot_curve.setPen(pg.mkPen(color=t['graph_line'], width=2))
-
+        for curve in self._spectra_curves.values():
+            curve.setPen(pg.mkPen(color=t['graph_line'], width=2))
+        for annotation in self.peak_annotations:
+            annotation.setColor(pg.mkColor(t['graph_fg']))
         self._refresh_conn_dot()
 
-        # Forward theme ke startup dialog jika masih terbuka
         if self._startup_dialog and self._startup_dialog.isVisible():
             self._startup_dialog.update_theme(t)
 
     def _refresh_conn_dot(self):
-        """Update warna dot koneksi sesuai tema dan status."""
         t = self._current_theme
         if self.protocol.is_connected:
             self.lbl_conn_dot.setStyleSheet(
@@ -1137,24 +1242,14 @@ class MainWindow(QMainWindow):
                 f"color: {t['danger']}; font-size: 14px; background: transparent;"
             )
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Language system
-    # ══════════════════════════════════════════════════════════════════════════
-
     def _toggle_language(self):
-        """Toggle bahasa ID ↔ EN, simpan preferensi."""
         self._current_lang = "en" if self._current_lang == "id" else "id"
         self._settings.setValue("lang", self._current_lang)
         self._apply_language()
-        # Theme toggle text juga tergantung bahasa
         self._apply_theme()
 
     def _apply_language(self):
-        """Set semua teks UI dari dict bahasa aktif."""
-        # Window title
         self.setWindowTitle(self._tr("window_title"))
-
-        # -- Menu bar --
         self.menu_file.setTitle(self._tr("menu_file"))
         self.menu_instrument.setTitle(self._tr("menu_instrument"))
         self.menu_tools.setTitle(self._tr("menu_tools"))
@@ -1165,23 +1260,31 @@ class MainWindow(QMainWindow):
         self.act_settings.setText(self._tr("menu_settings"))
         self.act_open_log.setText(self._tr("menu_open_log_folder"))
 
-        # -- Language toggle --
         if self._current_lang == "id":
             self.btn_lang_toggle.setText(self._tr("lang_to_en"))
         else:
             self.btn_lang_toggle.setText(self._tr("lang_to_id"))
 
-        # -- GroupBox titles --
-        # self.grp_conn.setTitle(self._tr("grp_connection"))
-        self.grp_mode.setTitle(self._tr("grp_mode"))
-        self.grp_wl.setTitle(self._tr("grp_goto_wl"))
-        self.grp_calib.setTitle(self._tr("grp_calibration"))
-        self.grp_read.setTitle(self._tr("grp_read_data"))
-        self.grp_wscan.setTitle(self._tr("grp_wscan"))
-        self.grp_tscan.setTitle(self._tr("grp_tscan"))
-        self.grp_printer.setTitle(self._tr("grp_printer"))
 
-        # -- Labels --
+        # Dock, Toolbar & Tree labels
+        self.dock_workspace.setWindowTitle(self._tr("dock_workspace"))
+        self.toolbar.setWindowTitle(self._tr("toolbar_hardware"))
+        self.menu_view.setTitle(self._tr("menu_view"))
+        self.act_show_workspace.setText(self._tr("action_show_workspace"))
+
+        # Tree widget labels
+        self.tree_photometry.setText(0, self._tr("tree_photometry"))
+        self.tree_item_mode.setText(0, self._tr("grp_mode"))
+        self.tree_item_goto_wl.setText(0, self._tr("grp_goto_wl"))
+        self.tree_item_calib.setText(0, self._tr("grp_calibration"))
+        self.tree_item_read.setText(0, self._tr("grp_read_data"))
+        self.tree_spectrum.setText(0, self._tr("tree_spectrum"))
+        self.tree_item_wscan.setText(0, self._tr("grp_wscan"))
+        self.tree_item_tscan.setText(0, self._tr("grp_tscan"))
+        self.tree_accessories.setText(0, self._tr("tree_accessories"))
+        self.tree_item_printer.setText(0, self._tr("grp_printer"))
+        self.tree_item_connection.setText(0, self._tr("grp_connection"))
+
         self.lbl_com_port.setText(self._tr("lbl_com_port"))
         self.lbl_mode.setText(self._tr("lbl_mode"))
         self.lbl_wavelength.setText(self._tr("lbl_wavelength"))
@@ -1193,14 +1296,12 @@ class MainWindow(QMainWindow):
         self.lbl_duration.setText(self._tr("lbl_duration"))
         self.lbl_unit.setText(self._tr("lbl_unit"))
         self.lbl_printer_name.setText(self._tr("lbl_printer_name"))
-        # self.btn_refresh_printer.setText(self._tr("btn_refresh_printer"))
 
-        # -- Buttons --
-        # Connect button: depends on connection state
         if self.protocol.is_connected:
             self.btn_connect.setText(self._tr("btn_disconnect"))
             self.lbl_conn_status.setText(self._tr("status_connected"))
         else:
+            self.timer_live_display.stop()
             self.btn_connect.setText(self._tr("btn_connect"))
             self.lbl_conn_status.setText(self._tr("status_disconnected"))
 
@@ -1211,10 +1312,8 @@ class MainWindow(QMainWindow):
         self.btn_start_wscan.setText(self._tr("btn_start_wscan"))
         self.btn_start_tscan.setText(self._tr("btn_start_tscan"))
         self.btn_export_csv.setText(self._tr("btn_export_csv"))
-        # self.btn_refresh_printer.setText(self._tr("btn_refresh"))
         self.btn_export_graph.setText(self._tr("btn_export_graph"))
 
-        # -- Combo: time scan unit (save/restore index) --
         idx = self.combo_tscan_unit.currentIndex()
         if idx < 0:
             idx = 0
@@ -1225,57 +1324,52 @@ class MainWindow(QMainWindow):
         ])
         self.combo_tscan_unit.setCurrentIndex(idx)
 
-        # -- Progress bar formats --
         self.progress_wscan.setFormat(self._tr("progress_scanning"))
         self.progress_tscan.setFormat(self._tr("progress_measuring"))
 
-        # -- Tab titles --
         self.tab_bottom.setTabText(0, self._tr("tab_data"))
         self.tab_bottom.setTabText(1, self._tr("tab_log"))
 
-        # -- Table headers --
         self.table_data.setHorizontalHeaderLabels([
             self._tr("header_wavelength"),
             self._tr("header_value"),
         ])
 
-        # -- Log placeholder --
         self.txt_log.setPlaceholderText(self._tr("log_placeholder"))
-
-        # -- Status bar --
         self.status_bar.showMessage(self._tr("msg_ready"))
 
-        # Forward language ke startup dialog jika masih terbuka
         if self._startup_dialog and self._startup_dialog.isVisible():
             self._startup_dialog.update_language(self._current_lang)
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Signal / Slot wiring
-    # ══════════════════════════════════════════════════════════════════════════
+    @Slot(int, int)
+    def _on_progress_update(self, current, total):
+        if total <= 0:
+            self.main_progress_bar.setRange(0, 0)
+        else:
+            self.main_progress_bar.setRange(0, 100)
+            percentage = int((current / total) * 100)
+            self.main_progress_bar.setValue(min(percentage, 100))
 
     def _setup_connections(self):
-        """Hubungkan semua tombol ke slot handler."""
         self.btn_connect.clicked.connect(self._on_connect_clicked)
         self.combo_mode.currentIndexChanged.connect(self._on_set_mode)
         self.btn_goto_wl.clicked.connect(self._on_goto_wl)
         self.btn_auto_zero.clicked.connect(self._on_auto_zero)
         self.btn_baseline.clicked.connect(self._on_baseline)
         self.btn_read_data.clicked.connect(self._on_read_data)
+        self.btn_auto_read_toggle.clicked.connect(self._on_toggle_auto_read)
         self.btn_start_wscan.clicked.connect(self._on_start_wscan)
         self.btn_start_tscan.clicked.connect(self._on_start_tscan)
         self.btn_export_csv.clicked.connect(self._export_csv)
         self.btn_export_graph.clicked.connect(self._export_graph)
 
-        # -- Auto Connect --
         self._is_auto_connecting = False
         self.timer_auto_connect = QTimer(self)
         self.timer_auto_connect.timeout.connect(self._auto_connect_tick)
-        # Timer TIDAK di-start di sini — akan di-start setelah startup dialog ditutup
 
     def _auto_connect_tick(self):
         if self.protocol.is_connected or self._is_auto_connecting or self.dlg_adv_conn.isVisible():
             return
-        # Jangan auto-connect saat startup dialog masih terbuka
         if self._startup_dialog and self._startup_dialog.isVisible():
             return
         
@@ -1318,12 +1412,22 @@ class MainWindow(QMainWindow):
             
         self._run_in_thread(auto_connect_worker, on_success, on_error)
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Thread helper
-    # ══════════════════════════════════════════════════════════════════════════
+    def _on_tree_item_clicked(self, item, column):
+        """Handle tree widget item clicks — navigate to corresponding page in stacked widget."""
+        page_idx = self._tree_panel_map.get(id(item))
+        if page_idx is not None:
+            self.central_stack.setCurrentIndex(page_idx)
+        
+        if item is self.tree_item_goto_wl:
+            self.spin_wavelength.setFocus()
+            self.spin_wavelength.selectAll()
+        elif item is self.tree_item_read:
+            if self.btn_read_data.isEnabled():
+                self.btn_read_data.setFocus()
+        elif item is self.tree_item_connection:
+            self.dock_scroll.ensureWidgetVisible(self.dock_scroll.widget())
 
     def _run_in_thread(self, fn, on_success=None, on_error=None):
-        """Jalankan fn di thread pool. Hubungkan callback jika ada."""
         worker = Worker(fn)
         self._active_workers.add(worker)
         
@@ -1338,14 +1442,12 @@ class MainWindow(QMainWindow):
         worker.signals.error.connect(on_error or self._default_error_handler)
         self._serial_pool.start(worker)
 
-    
     def _show_alert(self, title, message):
         def _do_show():
             QMessageBox.warning(self, title, message)
         QTimer.singleShot(0, self, _do_show)
 
     def _default_error_handler(self, error_msg):
-        """Handler error default: tampilkan di status bar dan log."""
         short = error_msg.strip().split('\n')[-1]
         self.status_bar.showMessage(f"Error: {short}")
         self._log(f"ERROR: {short}")
@@ -1355,12 +1457,7 @@ class MainWindow(QMainWindow):
         self.progress_tscan.setVisible(False)
         self._show_alert(self._tr("title_error"), short)
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Koneksi (Tahap 3)
-    # ══════════════════════════════════════════════════════════════════════════
-
     def _refresh_ports(self):
-        """Refresh daftar COM port di dropdown."""
         current = self.combo_port.currentText()
         self.combo_port.clear()
         ports = UVProtocol.list_ports()
@@ -1371,7 +1468,6 @@ class MainWindow(QMainWindow):
         self._log(self._tr("log_ports_found", ports=display))
 
     def _on_connect_clicked(self):
-        """Toggle connect / disconnect."""
         if self.protocol.is_connected:
             self.protocol.disconnect()
             self._update_connection_status(False)
@@ -1400,9 +1496,7 @@ class MainWindow(QMainWindow):
             self._update_connection_status(True)
             self.status_bar.showMessage(self._tr("msg_connected", port=port))
             self._log(self._tr("msg_connect_ok", port=port))
-            # Simpan port terakhir yang berhasil connect
             self._settings.setValue("last_port", port)
-            # Notify startup dialog jika masih terbuka
             if self._startup_dialog and self._startup_dialog.isVisible():
                 self._startup_dialog.on_connect_success()
 
@@ -1419,16 +1513,15 @@ class MainWindow(QMainWindow):
             self._log(self._tr("msg_connect_error", err=msg))
             self.logger.error(f"Connection Error: {err}")
             self._show_alert(self._tr("title_error"), msg)
-            # Notify startup dialog jika masih terbuka
             if self._startup_dialog and self._startup_dialog.isVisible():
                 self._startup_dialog.on_connect_failed()
 
         self._run_in_thread(connect_workflow, on_success, on_error)
 
     def _update_connection_status(self, connected: bool):
-        """Update UI berdasarkan status koneksi."""
         t = self._current_theme
         if connected:
+            self.timer_live_display.start(1000)
             self.btn_connect.setText(self._tr("btn_disconnect"))
             self.btn_connect.setObjectName("btnSecondary")
             self.lbl_conn_status.setText(self._tr("status_connected"))
@@ -1436,6 +1529,7 @@ class MainWindow(QMainWindow):
                 f"color: {t['success']}; font-size: 14px; background: transparent;"
             )
         else:
+            self.timer_live_display.stop()
             self.btn_connect.setText(self._tr("btn_connect"))
             self.btn_connect.setObjectName("btnPrimary")
             self.lbl_conn_status.setText(self._tr("status_disconnected"))
@@ -1443,7 +1537,6 @@ class MainWindow(QMainWindow):
                 f"color: {t['danger']}; font-size: 14px; background: transparent;"
             )
 
-        # Force style refresh setelah objectName berubah
         self.btn_connect.style().unpolish(self.btn_connect)
         self.btn_connect.style().polish(self.btn_connect)
         self.btn_connect.update()
@@ -1452,11 +1545,11 @@ class MainWindow(QMainWindow):
         self._set_controls_enabled(connected)
 
     def _set_controls_enabled(self, enabled: bool):
-        """Enable/disable semua kontrol kecuali koneksi."""
         for widget in [
             self.btn_goto_wl,
             self.btn_auto_zero, self.btn_baseline,
-            self.btn_read_data, self.btn_start_wscan,
+            self.btn_read_data, self.spin_auto_read_interval, self.btn_auto_read_toggle,
+            self.btn_start_wscan,
             self.btn_start_tscan, self.combo_mode,
             self.spin_wavelength, self.spin_bl_start, self.spin_bl_end,
             self.spin_scan_start, self.spin_scan_end, self.combo_scan_speed,
@@ -1465,48 +1558,15 @@ class MainWindow(QMainWindow):
             widget.setEnabled(enabled)
 
     # ══════════════════════════════════════════════════════════════════════════
-    # GOTO WL — Set Wavelength (Tahap 3)
+    # MODIFIKASI: FUNGSI SET MODE (DENGAN RESET DATA)
     # ══════════════════════════════════════════════════════════════════════════
-
-    def _on_goto_wl(self):
-        """Kirim command w untuk pindah wavelength."""
-
-
-        if not self.protocol.is_connected:
-            self._show_alert(self._tr("title_error"), self._tr("msg_err_not_connected"))
-            return
-        wl = self.spin_wavelength.value()
-        wl_param = int(wl * 10)
-        cmd = f"w{wl_param}"
-
-        self._set_controls_enabled(False)
-        self.status_bar.showMessage(self._tr("msg_goto_wl_progress", wl=f"{wl:.1f}"))
-        self._log(f"GOTO WL: sending '{cmd}'")
-
-        def workflow():
-            ok = self.protocol.send_command(cmd)
-            if not ok:
-                raise RuntimeError(f"GOTO WL gagal: command '{cmd}' tidak di-ACK")
-            return wl
-
-        def on_success(result_wl):
-            self.lbl_current_wl.setText(f"{result_wl:.1f} nm")
-            self.status_bar.showMessage(
-                self._tr("msg_goto_wl_ok", wl=f"{result_wl:.1f}")
-            )
-            self._log(f"GOTO WL OK: {result_wl:.1f} nm")
-            self._set_controls_enabled(True)
-
-        self._run_in_thread(workflow, on_success)
-
-    # ══════════════════════════════════════════════════════════════════════════
-    # Mode Pengukuran (Tahap 4) — auto-apply via combo change
-    # ══════════════════════════════════════════════════════════════════════════
-
     def _on_set_mode(self, _idx=None):
-        """Kirim command v untuk set mode Abs/T%/Energy."""
         if not self.protocol.is_connected:
             return
+
+        if hasattr(self, 'auto_read_timer') and self.auto_read_timer.isActive():
+            self.btn_auto_read_toggle.setChecked(False)
+            self._on_toggle_auto_read()
 
         idx = self.combo_mode.currentIndex()
         cmd = f"v{idx}"
@@ -1532,24 +1592,61 @@ class MainWindow(QMainWindow):
                 self._tr("msg_set_mode_ok", label=mode_label)
             )
             self._log(f"Set mode OK: {mode_label}")
+
+            # Reset tabel saat mode diganti
+            self.table_data.setRowCount(0)
+            if hasattr(self, '_single_read_data'):
+                self._single_read_data.clear()
+
             self._set_controls_enabled(True)
 
         self._run_in_thread(workflow, on_success)
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Auto Zero (Tahap 4)
-    # ══════════════════════════════════════════════════════════════════════════
+
+    def _on_goto_wl(self):
+        if not self.protocol.is_connected:
+            self._show_alert(self._tr("title_error"), self._tr("msg_err_not_connected"))
+            return
+        wl = self.spin_wavelength.value()
+        wl_param = int(wl * 10)
+        cmd = f"w{wl_param}"
+
+        self._set_controls_enabled(False)
+        self.status_bar.showMessage(self._tr("msg_goto_wl_progress", wl=f"{wl:.1f}"))
+        self._log(f"GOTO WL: sending '{cmd}'")
+
+        self.main_progress_bar.setRange(0, 0)
+        self.main_progress_bar.setVisible(True)
+        self.main_progress_bar.setFormat("")
+
+        def workflow():
+            ok = self.protocol.send_command(cmd)
+            if not ok:
+                raise RuntimeError(f"GOTO WL gagal: command '{cmd}' tidak di-ACK")
+            return wl
+
+        def on_success(result_wl):
+            self.main_progress_bar.setVisible(False)
+            self.lbl_current_wl.setText(f"{result_wl:.1f} nm")
+            self.status_bar.showMessage(
+                self._tr("msg_goto_wl_ok", wl=f"{result_wl:.1f}")
+            )
+            self._log(f"GOTO WL OK: {result_wl:.1f} nm")
+            self._set_controls_enabled(True)
+
+        self._run_in_thread(workflow, on_success)
 
     def _on_auto_zero(self):
-        """Kirim command x untuk auto zero."""
-
-
         if not self.protocol.is_connected:
             self._show_alert(self._tr("title_error"), self._tr("msg_err_not_connected"))
             return
         self._set_controls_enabled(False)
         self.status_bar.showMessage(self._tr("msg_auto_zero_progress"))
         self._log("A-Z: sending 'x'")
+
+        self.main_progress_bar.setRange(0, 0)
+        self.main_progress_bar.setVisible(True)
+        self.main_progress_bar.setFormat("")
 
         def workflow():
             ok = self.protocol.send_command("x")
@@ -1558,20 +1655,14 @@ class MainWindow(QMainWindow):
             return True
 
         def on_success(_):
+            self.main_progress_bar.setVisible(False)
             self.status_bar.showMessage(self._tr("msg_auto_zero_ok"))
             self._log("A-Z OK")
             self._set_controls_enabled(True)
 
         self._run_in_thread(workflow, on_success)
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Baseline Correction (Tahap 4)
-    # ══════════════════════════════════════════════════════════════════════════
-
     def _on_baseline(self):
-        """Kirim command c untuk baseline correction."""
-
-
         if not self.protocol.is_connected:
             self._show_alert(self._tr("title_error"), self._tr("msg_err_not_connected"))
             return
@@ -1587,6 +1678,10 @@ class MainWindow(QMainWindow):
         )
         self._log(f"B-L: sending '{cmd}'")
 
+        self.main_progress_bar.setRange(0, 0)
+        self.main_progress_bar.setVisible(True)
+        self.main_progress_bar.setFormat("")
+
         def workflow():
             ok = self.protocol.send_command(cmd)
             if not ok:
@@ -1594,6 +1689,7 @@ class MainWindow(QMainWindow):
             return True
 
         def on_success(_):
+            self.main_progress_bar.setVisible(False)
             self.status_bar.showMessage(
                 self._tr("msg_baseline_ok", start=f"{start:.1f}", end=f"{end:.1f}")
             )
@@ -1603,19 +1699,20 @@ class MainWindow(QMainWindow):
         self._run_in_thread(workflow, on_success)
 
     # ══════════════════════════════════════════════════════════════════════════
-    # Baca Data (Tahap 3)
+    # MODIFIKASI: FUNGSI BACA DATA (HAPUS HURUF "d" DAN SIMPAN DATA)
     # ══════════════════════════════════════════════════════════════════════════
-
     def _on_read_data(self):
-        """Kirim command d untuk baca nilai saat ini."""
-
-
+        """Kirim command d untuk baca nilai saat ini, lalu simpan ke Tabel."""
         if not self.protocol.is_connected:
             self._show_alert(self._tr("title_error"), self._tr("msg_err_not_connected"))
             return
         self._set_controls_enabled(False)
         self.status_bar.showMessage(self._tr("msg_read_progress"))
         self._log("Read data: sending 'd'")
+
+        self.main_progress_bar.setRange(0, 0)
+        self.main_progress_bar.setVisible(True)
+        self.main_progress_bar.setFormat("")
 
         def workflow():
             result = self.protocol.read_data("d")
@@ -1624,33 +1721,146 @@ class MainWindow(QMainWindow):
             return result
 
         def on_success(raw_value):
+            self.main_progress_bar.setVisible(False)
             self._log(f"Read data OK: '{raw_value}'")
+            
+            # Membersihkan karakter non-angka di awal string (misal: 'd', spasi, atau '+')
+            clean_value = raw_value.strip()
+            if clean_value.lower().startswith('d'):
+                clean_value = clean_value[1:].strip()
+
+            numeric_val = None
             try:
-                numeric = float(raw_value.strip())
-                self.lbl_current_value.setText(f"{numeric:.4f}")
+                numeric_val = float(clean_value)
+                self.lbl_current_value.setText(f"{numeric_val:.4f}")
             except ValueError:
-                self.lbl_current_value.setText(raw_value.strip())
+                self.lbl_current_value.setText(clean_value)
+            
             self.status_bar.showMessage(
-                self._tr("msg_read_value", val=raw_value.strip())
+                self._tr("msg_read_value", val=clean_value)
             )
+
+            # Menyimpan ke Tabel Data
+            if numeric_val is not None:
+                if not hasattr(self, '_single_read_data'):
+                    self._single_read_data = []
+                    
+                self._single_read_data.append(numeric_val)
+                n = len(self._single_read_data)
+                
+                y_label = MODE_LABELS[self._current_mode_index]
+                self.table_data.setHorizontalHeaderLabels(["No.", y_label])
+                
+                self.table_data.setRowCount(n)
+                for i, val in enumerate(self._single_read_data):
+                    self.table_data.setItem(i, 0, QTableWidgetItem(str(i + 1)))
+                    self.table_data.setItem(i, 1, QTableWidgetItem(f"{val:.4f}"))
+                
+                self.tab_bottom.setCurrentIndex(0)
+
             self._set_controls_enabled(True)
 
         self._run_in_thread(workflow, on_success)
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Wavelength Scan (Tahap 5)
-    # ══════════════════════════════════════════════════════════════════════════
+    @Slot()
+    def _on_toggle_auto_read(self):
+        if self.btn_auto_read_toggle.isChecked():
+            self.btn_auto_read_toggle.setText("Stop Auto-Read")
+            self.btn_read_data.setEnabled(False)
+            interval_ms = self.spin_auto_read_interval.value() * 1000
+            self.auto_read_timer.start(interval_ms)
+            self._perform_auto_read()  # Trigger immediately
+        else:
+            self.btn_auto_read_toggle.setText("Start Auto-Read")
+            self.btn_read_data.setEnabled(True)
+            self.auto_read_timer.stop()
+
+    @Slot()
+    def _perform_live_read(self):
+        if not self.protocol.is_connected:
+            return
+            
+        # Only read if no other serial task is running
+        if self._serial_pool.activeThreadCount() > 0:
+            return
+            
+        def workflow():
+            result = self.protocol.read_data("d")
+            if result is None:
+                raise RuntimeError("Live Read gagal: tidak ada respons")
+            return result
+
+        def on_success(raw_value):
+            clean_value = raw_value.strip()
+            if clean_value.lower().startswith('d'):
+                clean_value = clean_value[1:].strip()
+
+            try:
+                numeric_val = float(clean_value)
+                self.lbl_current_value.setText(f"{numeric_val:.4f}")
+            except ValueError:
+                self.lbl_current_value.setText(clean_value)
+
+        # We run silently, no error dialogs or status bar spam
+        def on_error(err):
+            self.main_progress_bar.setVisible(False)
+            self.main_progress_bar.setVisible(False)
+            self.main_progress_bar.setVisible(False)
+            self.main_progress_bar.setVisible(False)
+            pass
+
+        self._run_in_thread(workflow, on_success, on_error)
+
+    @Slot()
+    def _perform_auto_read(self):
+        if not self.protocol.is_connected:
+            self.btn_auto_read_toggle.setChecked(False)
+            self._on_toggle_auto_read()
+            return
+            
+        def workflow():
+            result = self.protocol.read_data("d")
+            if result is None:
+                raise RuntimeError("Auto-Read gagal: tidak ada respons")
+            return result
+
+        def on_success(raw_value):
+            clean_value = raw_value.strip()
+            if clean_value.lower().startswith('d'):
+                clean_value = clean_value[1:].strip()
+
+            numeric_val = None
+            try:
+                numeric_val = float(clean_value)
+                self.lbl_current_value.setText(f"{numeric_val:.4f}")
+            except ValueError:
+                self.lbl_current_value.setText(clean_value)
+            
+            self.status_bar.showMessage(self._tr("msg_read_value", val=clean_value))
+
+            if numeric_val is not None:
+                if not hasattr(self, '_single_read_data'):
+                    self._single_read_data = []
+                    
+                self._single_read_data.append(numeric_val)
+                n = len(self._single_read_data)
+                
+                y_label = MODE_LABELS[self._current_mode_index]
+                self.table_data.setHorizontalHeaderLabels(["No.", y_label])
+                
+                self.table_data.setRowCount(n)
+                # Optimally add only the last item
+                self.table_data.setItem(n - 1, 0, QTableWidgetItem(str(n)))
+                self.table_data.setItem(n - 1, 1, QTableWidgetItem(f"{numeric_val:.4f}"))
+                self.table_data.scrollToBottom()
+
+        self._run_in_thread(workflow, on_success)
+
+
+    @Slot()
+
 
     def _on_start_wscan(self):
-        """
-        Wavelength Scan — alur:
-        1. Kirim a{start},{end},{speed} (Protocol A)
-        2. Tunggu EOT (alat melakukan pengukuran)
-        3. Tarik data via f0 (Protocol B')
-        4. Render grafik penuh
-        """
-
-
         if not self.protocol.is_connected:
             self._show_alert(self._tr("title_error"), self._tr("msg_err_not_connected"))
             return
@@ -1667,8 +1877,13 @@ class MainWindow(QMainWindow):
         cmd_scan = f"a{start_param},{end_param},{speed}"
 
         self._set_controls_enabled(False)
-        self.progress_wscan.setVisible(True)
-        self.progress_wscan.setFormat(self._tr("progress_scanning"))
+        speed_nm_per_sec = {1: 16, 2: 8, 3: 4, 4: 2, 5: 1}.get(speed, 4)
+        estimated_seconds = abs(end - start) / speed_nm_per_sec
+        expected_points = int(abs(end - start) * 2) # asumsi 0.5nm step
+        self.main_progress_bar.setRange(0, 100)
+        self.main_progress_bar.setValue(0)
+        self.main_progress_bar.setVisible(True)
+        self.main_progress_bar.setFormat("%p%")
         self.status_bar.showMessage(
             self._tr("msg_wscan_progress",
                      start=f"{start:.1f}", end=f"{end:.1f}", speed=speed)
@@ -1686,14 +1901,15 @@ class MainWindow(QMainWindow):
                 raise RuntimeError("Scan timeout: alat tidak mengirim EOT")
 
             self._log_signal.emit(self._tr("msg_wscan_pulling"))
-            data = self.protocol.read_bulk_data("f0")
+            data = self.protocol.read_bulk_data("f0", progress_callback=lambda c: self._progress_signal.emit(c, expected_points))
             if data is None:
                 raise RuntimeError("Gagal membaca data scan (Protocol B')")
 
             return data
 
         def on_success(data):
-            self.progress_wscan.setVisible(False)
+            self.main_progress_bar.setValue(100)
+            self.main_progress_bar.setVisible(False)
             self._log(f"W-Scan OK: {len(data)} data points")
 
             self._render_scan_result(
@@ -1704,25 +1920,12 @@ class MainWindow(QMainWindow):
             self._set_controls_enabled(True)
 
         def on_error(err):
-            self.progress_wscan.setVisible(False)
+            self.main_progress_bar.setVisible(False)
             self._default_error_handler(err)
 
         self._run_in_thread(workflow, on_success, on_error)
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Time Scan (Tahap 6)
-    # ══════════════════════════════════════════════════════════════════════════
-
     def _on_start_tscan(self):
-        """
-        Time Scan — alur:
-        1. Kirim b{durasi},{satuan} (Protocol A)  satuan: 0=detik, 1=menit
-        2. Tunggu EOT (alat melakukan pengukuran)
-        3. Tarik data via f0 (Protocol B')
-        4. Render grafik penuh (nilai vs waktu)
-        """
-
-
         if not self.protocol.is_connected:
             self._show_alert(self._tr("title_error"), self._tr("msg_err_not_connected"))
             return
@@ -1735,8 +1938,12 @@ class MainWindow(QMainWindow):
         timeout_seconds = duration * (60 if unit_idx == 1 else 1) + 60
 
         self._set_controls_enabled(False)
-        self.progress_tscan.setVisible(True)
-        self.progress_tscan.setFormat(self._tr("progress_measuring"))
+        total_seconds = duration * (60 if unit_idx == 1 else 1)
+        expected_points = total_seconds
+        self.main_progress_bar.setRange(0, 100)
+        self.main_progress_bar.setValue(0)
+        self.main_progress_bar.setVisible(True)
+        self.main_progress_bar.setFormat("%p%")
         self.status_bar.showMessage(
             self._tr("msg_tscan_progress", duration=duration, unit=unit_label)
         )
@@ -1755,7 +1962,7 @@ class MainWindow(QMainWindow):
                 raise RuntimeError("Time scan timeout: alat tidak mengirim EOT")
 
             self._log_signal.emit(self._tr("msg_tscan_pulling"))
-            data = self.protocol.read_bulk_data("f0")
+            data = self.protocol.read_bulk_data("f0", progress_callback=lambda c: self._progress_signal.emit(c, expected_points))
             if data is None:
                 raise RuntimeError("Gagal membaca data time scan (Protocol B')")
 
@@ -1764,7 +1971,8 @@ class MainWindow(QMainWindow):
         total_seconds = duration * (60 if unit_idx == 1 else 1)
 
         def on_success(data):
-            self.progress_tscan.setVisible(False)
+            self.main_progress_bar.setValue(100)
+            self.main_progress_bar.setVisible(False)
             self._log(f"T-Scan OK: {len(data)} data points")
 
             self._render_scan_result(
@@ -1775,36 +1983,23 @@ class MainWindow(QMainWindow):
             self._set_controls_enabled(True)
 
         def on_error(err):
-            self.progress_tscan.setVisible(False)
+            self.main_progress_bar.setVisible(False)
             self._default_error_handler(err)
 
         self._run_in_thread(workflow, on_success, on_error)
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Render hasil scan ke grafik + tabel
-    # ══════════════════════════════════════════════════════════════════════════
-
     def _render_scan_result(self, data, scan_type, x_start, x_end):
-        """
-        Parse data string, hitung sumbu X, plot grafik, isi tabel.
-
-        Args:
-            data: list of strings dari Protocol B'
-            scan_type: 'wavelength' atau 'time'
-            x_start: nilai awal sumbu X
-            x_end: nilai akhir sumbu X
-        """
         y_values = []
         for raw in data:
+            s = raw.strip()
+            if not s:
+                continue
+            parts = s.replace(',', ' ').split()
             try:
-                y_values.append(float(raw.strip()))
-            except ValueError:
-                parts = raw.strip().split(',')
-                try:
-                    y_values.append(float(parts[-1]))
-                except (ValueError, IndexError):
-                    y_values.append(0.0)
-                    self._log(f"WARNING: tidak bisa parse '{raw}', pakai 0.0")
+                y_values.append(float(parts[-1]))
+            except (ValueError, IndexError):
+                y_values.append(0.0)
+                self._log(f"WARNING: tidak bisa parse '{raw}', pakai 0.0")
 
         n = len(y_values)
         if n == 0:
@@ -1835,7 +2030,17 @@ class MainWindow(QMainWindow):
             'timestamp': datetime.now().isoformat(),
         }
 
-        self.plot_curve.setData(x_values, y_values)
+        scan_name = f"Spectra {self._spectra_count}"
+        self._spectra_count += 1
+        
+        color = pg.intColor(self._spectra_count, hues=9)
+        curve = self.plot_widget.plot(x_values, y_values, pen=pg.mkPen(color=color, width=2))
+        self._spectra_curves[scan_name] = curve
+        
+        item = QListWidgetItem(scan_name)
+        item.setFlags(item.flags() | Qt.ItemIsUserCheckable)
+        item.setCheckState(Qt.CheckState.Checked)
+        self.list_spectra.addItem(item)
         self.plot_widget.setLabel('bottom', x_label.split(' (')[0], units=x_unit)
         self.plot_widget.setLabel('left', MODE_Y_LABELS[self._current_mode_index])
 
@@ -1846,13 +2051,17 @@ class MainWindow(QMainWindow):
             self.table_data.setItem(i, 1, QTableWidgetItem(f"{y_values[i]:.4f}"))
 
         self.tab_bottom.setCurrentIndex(0)
+        self.plot_widget.enableAutoRange(axis='xy')
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Export CSV
-    # ══════════════════════════════════════════════════════════════════════════
+    def _on_mouse_moved(self, evt):
+        pos = evt[0]
+        if self.plot_widget.sceneBoundingRect().contains(pos):
+            mousePoint = self.plot_widget.getPlotItem().vb.mapSceneToView(pos)
+            self.vLine.setPos(mousePoint.x())
+            self.hLine.setPos(mousePoint.y())
+            self.lbl_crosshair.setText(f"X: {mousePoint.x():.2f}   Y: {mousePoint.y():.4f}")
 
     def _export_csv(self):
-        """Export isi tabel Data ke file CSV."""
         rows = self.table_data.rowCount()
         if rows == 0:
             self.status_bar.showMessage(self._tr("msg_csv_no_data"))
@@ -1894,7 +2103,6 @@ class MainWindow(QMainWindow):
             self.status_bar.showMessage(self._tr("msg_csv_saved", path=short_path))
             self._log(f"CSV saved: {filepath}")
             
-            # Print logic
             self._prompt_print_csv(headers, rows_data)
             
         except Exception as e:
@@ -1903,12 +2111,7 @@ class MainWindow(QMainWindow):
             self._log(f"CSV error: {e}")
             self.logger.exception(f"Error during CSV export: {e}")
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Export Grafik (PNG)
-    # ══════════════════════════════════════════════════════════════════════════
-
     def _export_graph(self):
-        """Export tampilan grafik saat ini ke file PNG."""
         try:
             from pyqtgraph.exporters import ImageExporter
         except ImportError:
@@ -1931,7 +2134,6 @@ class MainWindow(QMainWindow):
 
         try:
             exporter = ImageExporter(self.plot_widget.plotItem)
-            # Export at 2x widget width for crisp output
             exporter.parameters()['width'] = int(self.plot_widget.width() * 2)
             exporter.export(filepath)
 
@@ -1941,7 +2143,6 @@ class MainWindow(QMainWindow):
             )
             self._log(f"Graph saved: {filepath}")
             
-            # Print logic
             self._prompt_print_graph(filepath)
             
         except Exception as e:
@@ -1949,10 +2150,6 @@ class MainWindow(QMainWindow):
             self._show_alert(self._tr("title_error"), self._tr("msg_graph_error", err=str(e)))
             self._log(f"Graph export error: {e}")
             self.logger.exception(f"Error during graph export: {e}")
-
-    # ══════════════════════════════════════════════════════════════════════════
-    # Print Helper Functions
-    # ══════════════════════════════════════════════════════════════════════════
 
     def _get_active_printer(self):
         printer_name = self.combo_printer.currentText()
@@ -1984,15 +2181,36 @@ class MainWindow(QMainWindow):
             return
             
         try:
+            pp = PRINT_PALETTE
             printer = QPrinter(p_info)
             doc = QTextDocument()
             
-            html = "<h2>Data Export</h2>"
-            html += "<table border='1' cellspacing='0' cellpadding='4'>"
-            html += "<tr>" + "".join(f"<th>{h}</th>" for h in headers) + "</tr>"
+            html = f"""
+            <div style="font-family: 'Segoe UI', Arial, sans-serif; color: {pp['text']};">
+              <h2 style="color: {pp['text']}; font-size: 16pt;">Data Export</h2>
+              <table border="0" cellspacing="0" cellpadding="6"
+                     style="border-collapse: collapse; width: 100%;">
+                <tr>
+            """
+            for h in headers:
+                html += (
+                    f'<th style="border: 2px solid {pp["table_border"]};'
+                    f' background-color: {pp["table_header_bg"]};'
+                    f' color: {pp["text"]}; font-size: 11pt;'
+                    f' font-weight: bold; text-align: center;'
+                    f' padding: 6px 10px;">{h}</th>'
+                )
+            html += "</tr>"
             for row in rows_data:
-                html += "<tr>" + "".join(f"<td>{r}</td>" for r in row) + "</tr>"
-            html += "</table>"
+                html += "<tr>"
+                for r in row:
+                    html += (
+                        f'<td style="border: 1px solid {pp["table_border"]};'
+                        f' color: {pp["text"]}; font-size: 10pt;'
+                        f' padding: 4px 8px; text-align: center;">{r}</td>'
+                    )
+                html += "</tr>"
+            html += "</table></div>"
             
             doc.setHtml(html)
             doc.print_(printer)
@@ -2026,16 +2244,49 @@ class MainWindow(QMainWindow):
             
         try:
             from PySide6.QtGui import QImage
+            from pyqtgraph.exporters import ImageExporter
+            import tempfile
+            
+            pp = PRINT_PALETTE
+            t = self._current_theme
+            
+            self.plot_widget.setBackground(pp['background'])
+            for axis_name in ('left', 'bottom'):
+                ax = self.plot_widget.getAxis(axis_name)
+                ax.setPen(pg.mkPen(color=pp['axis'], width=2))
+                ax.setTextPen(pg.mkPen(color=pp['text']))
+                tick_font = QFont("Segoe UI", 12)
+                ax.setTickFont(tick_font)
+            
+            self.plot_widget.getAxis('left').label.setDefaultTextColor(pg.mkColor(pp['text']))
+            self.plot_widget.getAxis('bottom').label.setDefaultTextColor(pg.mkColor(pp['text']))
+            for curve in self._spectra_curves.values():
+                curve.setPen(pg.mkPen(color=pp['graph_line'], width=pp['graph_line_width']))
+            self.plot_widget.getPlotItem().getAxis('left').setGrid(180)
+            self.plot_widget.getPlotItem().getAxis('bottom').setGrid(180)
+            
+            print_img_path = filepath.replace('.png', '_print.png')
+            exporter = ImageExporter(self.plot_widget.plotItem)
+            exporter.parameters()['width'] = int(self.plot_widget.width() * 3)
+            exporter.export(print_img_path)
+            
+            self.plot_widget.setBackground(t['graph_bg'])
+            for axis_name in ('left', 'bottom'):
+                ax = self.plot_widget.getAxis(axis_name)
+                ax.setPen(pg.mkPen(color=t['graph_fg']))
+                ax.setTextPen(pg.mkPen(color=t['graph_fg']))
+                ax.setTickFont(QFont("Segoe UI", 9))
+            self.plot_widget.getAxis('left').label.setDefaultTextColor(pg.mkColor(t['graph_fg']))
+            self.plot_widget.getAxis('bottom').label.setDefaultTextColor(pg.mkColor(t['graph_fg']))
+            for curve in self._spectra_curves.values():
+                curve.setPen(pg.mkPen(color=t['graph_line'], width=2))
+            self.plot_widget.showGrid(x=True, y=True, alpha=0.3)
             
             printer = QPrinter(p_info)
-            
-            # Create a painter to draw the image onto the printer
             painter = QPainter()
             painter.begin(printer)
             
-            img = QImage(filepath)
-            
-            # Scale image to fit the page horizontally if needed, keeping aspect ratio
+            img = QImage(print_img_path)
             rect = painter.viewport()
             size = img.size()
             size.scale(rect.size(), Qt.KeepAspectRatio)
@@ -2043,24 +2294,27 @@ class MainWindow(QMainWindow):
             painter.setViewport(rect.x(), rect.y(), size.width(), size.height())
             painter.setWindow(img.rect())
             painter.drawImage(0, 0, img)
-            
             painter.end()
+            
+            try:
+                os.remove(print_img_path)
+            except OSError:
+                pass
             
             self._log(self._tr("msg_print_ok"))
             self.status_bar.showMessage(self._tr("msg_print_ok"))
         except Exception as e:
+            try:
+                self._apply_theme()
+            except Exception:
+                pass
             err_msg = str(e)
             self._log(self._tr("msg_print_error", err=err_msg))
             self.status_bar.showMessage(self._tr("msg_print_error", err=err_msg))
             self._show_alert(self._tr("title_error"), self._tr("msg_print_error", err=err_msg))
             self.logger.exception("Error printing graph")
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Logging & Printer Status
-    # ══════════════════════════════════════════════════════════════════════════
-
     def _refresh_printers(self):
-        """Refresh daftar printer di sistem."""
         current = self.combo_printer.currentText()
         self.combo_printer.clear()
         
@@ -2077,7 +2331,6 @@ class MainWindow(QMainWindow):
         self._update_printer_status()
 
     def _update_printer_status(self):
-        """Update indikator warna status printer."""
         t = self._current_theme
         if self.combo_printer.count() > 0:
             self.lbl_printer_status.setText(self._tr("status_printer_ready"))
@@ -2091,40 +2344,68 @@ class MainWindow(QMainWindow):
             )
 
     def _open_log_folder(self):
-        """Buka folder logs/ di file explorer."""
         log_dir = Path("logs").absolute()
         if log_dir.exists():
             QDesktopServices.openUrl(QUrl.fromLocalFile(str(log_dir)))
 
     def _log(self, message: str):
-        """Tambah pesan ke panel log dan file log (dari main thread)."""
         timestamp = datetime.now().strftime("%H:%M:%S.%f")[:-3]
         self.txt_log.append(f"[{timestamp}] {message}")
         if not message.startswith("ERROR:"):
             self.logger.info(message)
 
     def _on_raw_data(self, direction: str, data: bytes):
-        """
-        Callback dari UVProtocol — dipanggil dari WORKER THREAD.
-        Gunakan signal untuk marshal ke main thread.
-        """
         formatted = UVProtocol.format_bytes_display(data)
         self._log_signal.emit(f"  {direction}: {formatted}")
 
     @Slot(str)
     def _append_log_text(self, text: str):
-        """Slot: terima log dari worker thread, tulis ke panel log & file."""
         timestamp = datetime.now().strftime("%H:%M:%S.%f")[:-3]
         self.txt_log.append(f"[{timestamp}] {text}")
         self.logger.info(text)
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # Stylesheet (token-based)
-    # ══════════════════════════════════════════════════════════════════════════
+    @Slot(QListWidgetItem)
+    def _on_scan_visibility_changed(self, item: QListWidgetItem):
+        scan_name = item.text()
+        if scan_name in self._spectra_curves:
+            curve = self._spectra_curves[scan_name]
+            curve.setVisible(item.checkState() == Qt.CheckState.Checked)
+
+    @Slot()
+    def _on_display_all_spectra_clicked(self):
+        # Temporarily block signals to avoid triggering itemChanged for each item
+        self.list_spectra.blockSignals(True)
+        for i in range(self.list_spectra.count()):
+            item = self.list_spectra.item(i)
+            item.setCheckState(Qt.CheckState.Checked)
+            scan_name = item.text()
+            if scan_name in self._spectra_curves:
+                self._spectra_curves[scan_name].setVisible(True)
+        self.list_spectra.blockSignals(False)
+
+    @Slot()
+    def _on_find_peak_clicked(self):
+        for scan_name, curve in self._spectra_curves.items():
+            if curve.isVisible():
+                x_data, y_data = curve.getData()
+                if x_data is not None and len(x_data) > 0:
+                    max_idx = np.argmax(y_data)
+                    x_peak = x_data[max_idx]
+                    y_peak = y_data[max_idx]
+                    
+                    text = pg.TextItem(f"{scan_name} Peak: {x_peak:.2f}\n{y_peak:.4f}", anchor=(0.5, 1.2), color=self._current_theme['graph_fg'])
+                    text.setPos(x_peak, y_peak)
+                    self.plot_widget.addItem(text)
+                    self.peak_annotations.append(text)
+
+    @Slot()
+    def _on_clear_peaks_clicked(self):
+        for annotation in self.peak_annotations:
+            self.plot_widget.removeItem(annotation)
+        self.peak_annotations.clear()
 
     @staticmethod
     def _build_stylesheet(t: dict) -> str:
-        """Build stylesheet lengkap dari design tokens."""
         return f"""
             /* ── Base ─────────────────────────────────────────────── */
             QMainWindow, QWidget {{
@@ -2482,4 +2763,85 @@ class MainWindow(QMainWindow):
             QSplitter::handle:hover {{
                 background-color: {t['accent']};
             }}
+
+            /* ── Toolbar ─────────────────────────────────────────────────── */
+            QToolBar#hardwareToolbar {{
+                background-color: {t['toolbar_bg']};
+                border-bottom: 1px solid {t['toolbar_border']};
+                padding: 4px 8px;
+                spacing: 6px;
+            }}
+            QToolBar#hardwareToolbar QLabel {{
+                color: {t['text_secondary']};
+                font-size: 11px;
+                font-weight: 600;
+                padding: 0 4px;
+                background: transparent;
+            }}
+            QToolBar#hardwareToolbar QPushButton {{
+                padding: 5px 12px;
+                font-size: 11px;
+                min-height: 24px;
+            }}
+            QToolBar#hardwareToolbar QDoubleSpinBox {{
+                min-height: 24px;
+                font-size: 12px;
+            }}
+            QToolBar::separator {{
+                background-color: {t['border']};
+                width: 1px;
+                margin: 4px 6px;
+            }}
+
+            /* ── Dock Widget ──────────────────────────────────────────────── */
+            QDockWidget {{
+                color: {t['text_primary']};
+                font-weight: bold;
+                font-size: 12px;
+            }}
+            QDockWidget::title {{
+                background-color: {t['bg_panel_header']};
+                border: 1px solid {t['border']};
+                padding: 6px 10px;
+                text-align: left;
+            }}
+            QDockWidget::close-button, QDockWidget::float-button {{
+                border: none;
+                padding: 2px;
+            }}
+
+            /* ── Tree Widget ──────────────────────────────────────────────── */
+            QTreeWidget#workspaceTree {{
+                background-color: {t['bg_panel']};
+                color: {t['text_primary']};
+                border: 1px solid {t['border']};
+                border-radius: 4px;
+                font-size: 12px;
+                outline: none;
+            }}
+            QTreeWidget#workspaceTree::item {{
+                padding: 4px 8px;
+                border-radius: 3px;
+            }}
+            QTreeWidget#workspaceTree::item:hover {{
+                background-color: {t['bg_panel_header']};
+            }}
+            QTreeWidget#workspaceTree::item:selected {{
+                background-color: {t['accent']};
+                color: {t['accent_text']};
+            }}
+            QTreeWidget::branch {{
+                background: transparent;
+            }}
         """
+    def _create_icon(self, char, color="#888888", size=14):
+        pixmap = QPixmap(24, 24)
+        pixmap.fill(Qt.transparent)
+        painter = QPainter(pixmap)
+        painter.setRenderHints(QPainter.Antialiasing | QPainter.TextAntialiasing)
+        painter.setPen(QColor(color))
+        font = QFont("Segoe UI Emoji", size)
+        painter.setFont(font)
+        painter.drawText(pixmap.rect(), Qt.AlignCenter, char)
+        painter.end()
+        return QIcon(pixmap)

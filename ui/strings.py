@@ -173,6 +173,15 @@ STRINGS = {
         "dlg_startup_btn_retry": "Sudah, Coba Lagi",
         "dlg_startup_btn_skip": "Lewati",
         "dlg_startup_connecting": "Menghubungkan ke alat...",
+
+        # -- Dock / Toolbar / Tree --
+        "dock_workspace": "Ruang Kerja",
+        "toolbar_hardware": "Kontrol Alat",
+        "tree_photometry": "Fotometri",
+        "tree_spectrum": "Spektrum",
+        "tree_accessories": "Aksesori",
+        "menu_view": "Tampilan",
+        "action_show_workspace": "Tampilkan Panel Workspace",
     },
 
     # ══════════════════════════════════════════════════════════════════════
@@ -338,5 +347,14 @@ STRINGS = {
         "dlg_startup_btn_retry": "Done, Try Again",
         "dlg_startup_btn_skip": "Skip",
         "dlg_startup_connecting": "Connecting to instrument...",
+
+        # -- Dock / Toolbar / Tree --
+        "dock_workspace": "Workspace",
+        "toolbar_hardware": "Hardware Controls",
+        "tree_photometry": "Photometry",
+        "tree_spectrum": "Spectrum",
+        "tree_accessories": "Accessories",
+        "menu_view": "View",
+        "action_show_workspace": "Show Workspace Panel",
     },
 }

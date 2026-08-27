@@ -1,0 +1,1220 @@
+[2026-08-28 03:45:25] [INFO] [root] ==================================================
+[2026-08-28 03:45:25] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-08-28 03:45:25] [INFO] [spektro.ui] COM ports ditemukan: ['COM1']
+[2026-08-28 03:45:41] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:45:41] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:45:42] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:45:42] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:45:43] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:45:43] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:45:44] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:45:45] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:45:46] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:45:46] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:45:47] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:45:47] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:45:47] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:45:50] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:45:50] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:45:51] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:45:51] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:45:52] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:45:52] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:45:53] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:45:54] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:45:55] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:45:55] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:45:56] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:45:56] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:45:56] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:45:59] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:45:59] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:00] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:46:00] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:01] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:46:01] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:02] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:46:03] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:04] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:46:04] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:05] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:46:05] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:46:05] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:46:08] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:46:08] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:09] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:46:09] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:10] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:46:10] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:11] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:46:12] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:13] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:46:13] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:14] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:46:14] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:46:14] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:46:17] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:46:17] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:18] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:46:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:19] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:46:19] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:20] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:46:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:22] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:46:22] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:23] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:46:23] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:46:23] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:46:26] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:46:26] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:27] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:46:27] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:28] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:46:28] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:29] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:46:30] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:31] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:46:31] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:32] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:46:32] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:46:32] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:46:35] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:46:35] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:36] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:46:36] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:37] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:46:37] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:38] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:46:39] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:40] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:46:40] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:41] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:46:41] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:46:41] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:46:44] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:46:44] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:45] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:46:45] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:46] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:46:46] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:47] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:46:48] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:49] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:46:49] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:50] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:46:50] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:46:50] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:46:53] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:46:53] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:54] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:46:54] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:55] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:46:55] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:56] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:46:57] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:58] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:46:58] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:46:59] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:46:59] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:46:59] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:47:02] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:47:02] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:03] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:47:03] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:04] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:47:04] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:05] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:47:06] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:07] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:47:07] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:08] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:47:08] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:47:08] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:47:11] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:47:11] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:12] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:47:12] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:13] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:47:13] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:14] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:47:15] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:16] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:47:16] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:17] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:47:17] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:47:17] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:47:20] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:47:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:21] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:47:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:22] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:47:22] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:24] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:47:24] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:25] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:47:25] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:26] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:47:26] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:47:26] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:47:29] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:47:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:30] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:47:30] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:31] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:47:31] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:32] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:47:33] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:34] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:47:34] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:35] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:47:35] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:47:35] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:47:38] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:47:38] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:39] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:47:39] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:40] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:47:40] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:42] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:47:42] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:43] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:47:43] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:44] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:47:44] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:47:44] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:47:47] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:47:47] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:48] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:47:48] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:49] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:47:50] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:51] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:47:51] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:52] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:47:52] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:53] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:47:53] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:47:53] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:47:56] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:47:56] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:57] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:47:57] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:47:58] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:47:59] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:00] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:48:00] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:01] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:48:01] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:02] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:48:02] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:48:02] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:48:05] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:48:05] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:06] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:48:06] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:07] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:48:08] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:09] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:48:09] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:10] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:48:10] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:11] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:48:11] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:48:11] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:48:14] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:48:14] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:15] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:48:15] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:16] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:48:17] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:18] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:48:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:19] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:48:19] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:20] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:48:20] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:48:20] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:48:23] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:48:23] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:24] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:48:24] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:25] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:48:26] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:27] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:48:27] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:28] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:48:28] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:29] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:48:29] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:48:29] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:48:32] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:48:32] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:33] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:48:33] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:34] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:48:35] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:36] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:48:36] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:37] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:48:37] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:38] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:48:38] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:48:38] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:48:41] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:48:41] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:42] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:48:42] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:43] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:48:44] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:45] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:48:45] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:46] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:48:46] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:47] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:48:47] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:48:47] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:48:50] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:48:50] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:51] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:48:51] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:52] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:48:53] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:54] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:48:54] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:55] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:48:55] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:48:56] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:48:56] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:48:56] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:48:59] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:48:59] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:00] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:49:00] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:01] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:49:02] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:03] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:49:03] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:04] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:49:04] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:05] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:49:05] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:49:06] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:49:08] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:49:08] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:09] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:49:09] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:10] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:49:11] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:12] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:49:12] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:13] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:49:13] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:14] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:49:15] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:49:15] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:49:17] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:49:17] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:18] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:49:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:19] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:49:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:21] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:49:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:22] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:49:22] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:23] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:49:24] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:49:24] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:49:26] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:49:26] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:27] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:49:27] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:28] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:49:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:30] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:49:30] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:31] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:49:31] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:32] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:49:33] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:49:33] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:49:35] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:49:35] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:36] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:49:36] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:37] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:49:38] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:39] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:49:39] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:40] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:49:40] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:41] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:49:41] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:49:42] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:49:44] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:49:44] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:45] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:49:45] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:46] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:49:47] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:48] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:49:48] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:49] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:49:49] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:50] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:49:51] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:49:51] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:49:53] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:49:53] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:54] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:49:54] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:55] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:49:56] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:57] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:49:57] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:58] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:49:58] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:49:59] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:50:00] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:50:00] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:50:02] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:50:02] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:03] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:50:03] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:04] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:50:05] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:06] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:50:06] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:07] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:50:07] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:08] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:50:09] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:50:09] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:50:11] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:50:11] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:12] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:50:12] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:13] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:50:14] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:15] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:50:15] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:16] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:50:16] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:17] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:50:18] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:50:18] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:50:20] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:50:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:21] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:50:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:22] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:50:23] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:24] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:50:24] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:25] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:50:25] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:26] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:50:27] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:50:27] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:50:29] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:50:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:30] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:50:30] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:31] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:50:32] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:33] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:50:33] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:34] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:50:34] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:35] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:50:36] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:50:36] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:50:38] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:50:38] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:39] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:50:39] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:40] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:50:41] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:42] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:50:42] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:43] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:50:43] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:44] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:50:45] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:50:45] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:50:47] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:50:47] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:48] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:50:48] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:49] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:50:50] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:51] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:50:51] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:52] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:50:52] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:53] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:50:54] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:50:54] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:50:56] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:50:56] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:57] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:50:57] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:50:58] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:50:59] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:00] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:51:00] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:01] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:51:01] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:02] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:51:03] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:51:03] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:51:05] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:51:05] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:06] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:51:06] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:07] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:51:08] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:09] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:51:09] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:10] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:51:10] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:11] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:51:12] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:51:12] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:51:14] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:51:14] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:15] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:51:15] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:16] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:51:17] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:18] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:51:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:19] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:51:19] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:20] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:51:21] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:51:21] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:51:23] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:51:23] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:24] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:51:24] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:25] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:51:26] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:27] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:51:27] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:28] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:51:28] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:29] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:51:30] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:51:30] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:51:32] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:51:32] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:33] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:51:34] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:35] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:51:35] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:36] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:51:36] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:37] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:51:37] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:38] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:51:39] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:51:39] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:51:41] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:51:41] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:42] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:51:43] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:44] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:51:44] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:45] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:51:45] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:46] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:51:46] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:47] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:51:48] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:51:48] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:51:50] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:51:50] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:51] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:51:52] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:53] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:51:53] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:54] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:51:54] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:55] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:51:55] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:51:56] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:51:57] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:51:57] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:51:59] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:51:59] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:00] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:52:01] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:02] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:52:02] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:03] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:52:03] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:04] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:52:04] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:06] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:52:06] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:52:06] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:52:08] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:52:08] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:09] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:52:10] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:11] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:52:11] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:12] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:52:12] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:13] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:52:13] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:14] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:52:15] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:52:15] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:52:17] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:52:17] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:18] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:52:19] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:20] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:52:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:21] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:52:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:22] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:52:22] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:23] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:52:24] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:52:24] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:52:26] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:52:26] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:27] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:52:28] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:29] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:52:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:30] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:52:30] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:31] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:52:31] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:32] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:52:33] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:52:33] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:52:35] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:52:35] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:36] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:52:37] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:38] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:52:38] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:39] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:52:39] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:40] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:52:40] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:41] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:52:42] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:52:42] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:52:44] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:52:44] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:45] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:52:46] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:47] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:52:47] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:48] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:52:48] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:49] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:52:49] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:51] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:52:51] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:52:51] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:52:53] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:52:53] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:54] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:52:55] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:56] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:52:56] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:57] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:52:57] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:52:58] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:52:58] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:00] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:53:00] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:53:00] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:53:02] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:53:02] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:03] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:53:04] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:05] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:53:05] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:06] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:53:06] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:07] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:53:08] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:09] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:53:09] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:53:09] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:53:11] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:53:11] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:12] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:53:13] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:14] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:53:14] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:15] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:53:15] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:16] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:53:17] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:18] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:53:18] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:53:18] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:53:20] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:53:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:21] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:53:22] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:23] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:53:23] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:24] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:53:24] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:25] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:53:26] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:27] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:53:27] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:53:27] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:53:29] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:53:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:30] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:53:31] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:32] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:53:32] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:33] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:53:33] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:34] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:53:35] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:36] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:53:36] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:53:36] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:53:38] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:53:38] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:39] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:53:40] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:41] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:53:41] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:42] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:53:42] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:43] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:53:44] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:45] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:53:45] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:53:45] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:53:47] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:53:47] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:48] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:53:49] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:50] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:53:50] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:51] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:53:51] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:52] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:53:53] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:54] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:53:54] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:53:54] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:53:56] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:53:56] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:57] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:53:58] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:53:59] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:53:59] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:00] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:54:00] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:01] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:54:02] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:03] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:54:03] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:54:03] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:54:05] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:54:05] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:06] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:54:07] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:08] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:54:08] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:09] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:54:09] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:10] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:54:11] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:12] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:54:12] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:54:12] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:54:14] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:54:14] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:15] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:54:16] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:17] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:54:17] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:18] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:54:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:19] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:54:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:21] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:54:21] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:54:21] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:54:24] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:54:24] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:25] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:54:25] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:26] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:54:26] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:27] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:54:27] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:28] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:54:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:30] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:54:30] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:54:30] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:54:33] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:54:33] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:34] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:54:34] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:35] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:54:35] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:36] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:54:36] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:37] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:54:38] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:39] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:54:39] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:54:39] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:54:42] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:54:42] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:43] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:54:43] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:44] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:54:44] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:45] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:54:45] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:47] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:54:47] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:48] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:54:48] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:54:48] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:54:51] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:54:51] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:52] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:54:52] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:53] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:54:53] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:54] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:54:55] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:56] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:54:56] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:54:57] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:54:57] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:54:57] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:55:00] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:55:00] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:01] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:55:01] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:02] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:55:02] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:03] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:55:04] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:05] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:55:05] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:06] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:55:06] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:55:06] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:55:09] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:55:09] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:10] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:55:10] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:11] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:55:11] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:12] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:55:13] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:14] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:55:14] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:15] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:55:15] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:55:15] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:55:18] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:55:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:19] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:55:19] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:20] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:55:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:21] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:55:22] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:23] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:55:23] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:24] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:55:24] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:55:24] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:55:27] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:55:27] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:28] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:55:28] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:29] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:55:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:30] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:55:31] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:32] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:55:32] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:55:33] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:55:33] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:55:33] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:58:09] [INFO] [root] ==================================================
+[2026-08-28 03:58:09] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-08-28 03:58:10] [INFO] [spektro.ui] COM ports ditemukan: ['COM1']
+[2026-08-28 03:58:15] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:58:15] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:16] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:58:16] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:17] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:58:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:19] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:58:19] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:20] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:58:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:21] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:58:22] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:58:22] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:58:24] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:58:24] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:25] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:58:25] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:26] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:58:27] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:28] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:58:28] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:29] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:58:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:30] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:58:31] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:58:31] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 03:58:33] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 03:58:33] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:34] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 03:58:34] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:35] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 03:58:36] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 03:58:37] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 03:58:38] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 03:58:39] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 03:58:40] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 03:58:40] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:08:13] [INFO] [root] ==================================================
+[2026-08-28 04:08:13] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-08-28 04:08:14] [INFO] [spektro.ui] COM ports ditemukan: ['COM1']
+[2026-08-28 04:08:18] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:08:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:19] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:08:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:21] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:08:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:22] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:08:22] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:23] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:08:24] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:25] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:08:25] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:08:25] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:08:27] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:08:27] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:28] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:08:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:30] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:08:30] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:31] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:08:31] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:32] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:08:33] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:34] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:08:34] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:08:34] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:08:36] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:08:36] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:37] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:08:38] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:39] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:08:39] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:40] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:08:40] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:41] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:08:42] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:43] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:08:43] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:08:43] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:08:45] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:08:45] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:46] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:08:47] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:48] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:08:48] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:49] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:08:49] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:50] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:08:51] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:52] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:08:52] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:08:52] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:08:54] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:08:54] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:55] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:08:56] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:57] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:08:57] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:58] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:08:58] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:08:59] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:09:00] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:01] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:09:01] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:09:01] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:09:03] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:09:03] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:04] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:09:05] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:06] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:09:06] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:07] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:09:07] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:08] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:09:09] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:10] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:09:10] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:09:10] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:09:13] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:09:13] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:14] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:09:14] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:15] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:09:15] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:16] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:09:16] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:17] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:09:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:19] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:09:19] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:09:19] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:09:22] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:09:22] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:23] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:09:23] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:24] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:09:24] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:25] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:09:25] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:26] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:09:27] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:28] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:09:28] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:09:28] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:09:31] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:09:31] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:32] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:09:32] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:33] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:09:33] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:34] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:09:34] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:36] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:09:36] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:37] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:09:37] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:09:37] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:09:40] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:09:40] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:41] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:09:41] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:42] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:09:42] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:43] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:09:43] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:44] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:09:45] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:46] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:09:46] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:09:46] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:09:49] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:09:49] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:50] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:09:50] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:51] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:09:51] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:52] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:09:53] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:54] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:09:54] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:55] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:09:55] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:09:55] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:09:58] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:09:58] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:09:59] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:09:59] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:00] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:10:00] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:01] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:10:02] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:03] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:10:03] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:04] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:10:04] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:10:04] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:10:07] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:10:07] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:08] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:10:08] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:09] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:10:09] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:10] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:10:11] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:12] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:10:12] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:13] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:10:13] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:10:13] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:10:16] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:10:16] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:17] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:10:17] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:18] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:10:18] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:19] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:10:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:21] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:10:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:22] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:10:22] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:10:22] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:10:25] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:10:25] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:26] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:10:26] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:27] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:10:27] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:28] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:10:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:30] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:10:30] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:31] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:10:31] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:10:31] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:10:34] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:10:34] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:35] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:10:35] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:36] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:10:36] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:37] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:10:38] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:39] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:10:39] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:40] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:10:40] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:10:40] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:10:43] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:10:43] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:44] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:10:44] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:45] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:10:45] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:46] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:10:47] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:48] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:10:48] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:49] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:10:49] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:10:49] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:10:52] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:10:52] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:53] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:10:53] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:54] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:10:54] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:55] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:10:56] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:57] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:10:57] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:10:58] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:10:58] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:10:58] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:11:01] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:11:01] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:02] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:11:02] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:03] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:11:03] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:04] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:11:05] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:06] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:11:06] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:07] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:11:07] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:11:07] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:11:10] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:11:10] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:11] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:11:11] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:12] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:11:12] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:13] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:11:14] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:15] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:11:15] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:16] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:11:16] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:11:16] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:11:19] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:11:19] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:20] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:11:20] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:21] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:11:21] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:22] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:11:23] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:24] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:11:24] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:25] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:11:25] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:11:25] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:11:28] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:11:28] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:29] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:11:29] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:30] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:11:30] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:31] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:11:32] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:33] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:11:33] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:34] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:11:34] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:11:34] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:11:37] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:11:37] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:38] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:11:38] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:39] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:11:39] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:40] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:11:41] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:42] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:11:42] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:43] [WARNING] [protocol.uv_protocol] ENQ attempt 5/5: got timeout
+[2026-08-28 04:11:43] [ERROR] [protocol.uv_protocol] Connection test FAILED after max retries
+[2026-08-28 04:11:43] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:11:46] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:11:46] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:47] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:11:47] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:48] [WARNING] [protocol.uv_protocol] ENQ attempt 2/5: got timeout
+[2026-08-28 04:11:48] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:49] [WARNING] [protocol.uv_protocol] ENQ attempt 3/5: got timeout
+[2026-08-28 04:11:50] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:11:51] [WARNING] [protocol.uv_protocol] ENQ attempt 4/5: got timeout
+[2026-08-28 04:11:51] [INFO] [protocol.uv_protocol] Serial port COM1 closed
+[2026-08-28 04:14:40] [INFO] [root] ==================================================
+[2026-08-28 04:14:40] [INFO] [root] Aplikasi Spektro-Control dijalankan
+[2026-08-28 04:14:40] [INFO] [spektro.ui] COM ports ditemukan: ['COM1']
+[2026-08-28 04:14:46] [INFO] [protocol.uv_protocol] Serial port COM1 opened (baud=9600)
+[2026-08-28 04:14:46] [INFO] [spektro.ui]   TX: <ENQ>
+[2026-08-28 04:14:47] [WARNING] [protocol.uv_protocol] ENQ attempt 1/5: got timeout
+[2026-08-28 04:14:47] [INFO] [protocol.uv_protocol] Serial port COM1 closed

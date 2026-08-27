@@ -279,7 +279,7 @@ class UVProtocol:
         logger.info("abort_bulk_read: abort requested")
 
     def read_bulk_data(self, command_str: str, max_points: int = 2000,
-                       char_timeout: float = 2.0) -> Optional[List[str]]:
+                       char_timeout: float = 2.0, progress_callback=None) -> Optional[List[str]]:
         """
         Protocol B': baca BANYAK data sekaligus (dipakai command 'f').
 
@@ -411,6 +411,9 @@ class UVProtocol:
                 # Blok selesai (NUL diterima), simpan data
                 decoded = block_data.decode('ascii', errors='replace')
                 results.append(decoded)
+
+                if progress_callback:
+                    progress_callback(len(results))
 
                 # Cek apakah ada permintaan abort (ESC)
                 if self._abort_requested:
